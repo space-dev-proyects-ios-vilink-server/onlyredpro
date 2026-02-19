@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>OnlyRed — Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    color-scheme: light dark;
+    --bg: light-dark(#f0ebe4, #0c0b0a);
+    --text: light-dark(#0c0b0a, #f0ebe4);
+    --text-muted: light-dark(#6b6460, #8a847e);
+    --card-bg: light-dark(rgba(240,235,228,0.96), rgba(18,16,14,0.96));
+    --card-border: light-dark(rgba(12,11,10,0.1), rgba(240,235,228,0.1));
+    --shadow: light-dark(0 24px 80px rgba(0,0,0,0.18), 0 24px 80px rgba(0,0,0,0.7));
+    --red: #c0392b;
+    --red-glow: light-dark(rgba(192,57,43,0.15), rgba(192,57,43,0.28));
+    --red-glow-strong: light-dark(rgba(192,57,43,0.25), rgba(192,57,43,0.45));
+    --red-line: light-dark(rgba(192,57,43,0.45), rgba(192,57,43,0.6));
+    --stroke: light-dark(#0c0b0a, #f0ebe4);
+    --gold: light-dark(#b8923a, #d4a853);
+    --gold-glow: light-dark(rgba(184,146,58,0.15), rgba(212,168,83,0.2));
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+    position: relative;
+  }
+
+  /* ── Atmospheric background ── */
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  /* Main red orb */
+  .bg-orb {
+    position: absolute;
+    top: -30%;
+    left: -20%;
+    width: 100vmax;
+    height: 100vmax;
+    background: radial-gradient(circle, var(--red-glow) 0%, transparent 55%);
+    animation: pulse 9s ease-in-out infinite;
+  }
+
+  /* Secondary gold orb for premium feel */
+  .bg-orb-2 {
+    position: absolute;
+    bottom: -25%;
+    right: -20%;
+    width: 70vmax;
+    height: 70vmax;
+    background: radial-gradient(circle, var(--gold-glow) 0%, transparent 60%);
+    animation: pulse 12s 3s ease-in-out infinite reverse;
+  }
+
+  /* Fine grid */
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--card-border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--card-border) 1px, transparent 1px);
+    background-size: 52px 52px;
+    -webkit-mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%);
+    mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%);
+    opacity: 0.35;
+  }
+
+  /* Noise grain overlay for luxury texture */
+  .bg-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 180px;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+    50% { transform: scale(1.08) rotate(4deg); opacity: 1; }
+  }
+
+  /* ── Main stage ── */
+  .stage {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Top vert line */
+  .vert-line {
+    width: 1px;
+    height: 56px;
+    background: linear-gradient(to bottom, transparent, var(--red-line));
+    margin-bottom: 24px;
+    transform-origin: top;
+    animation: growLine 1s 0.1s cubic-bezier(0.22,1,0.36,1) both;
+  }
+
+  @keyframes growLine {
+    from { transform: scaleY(0); opacity: 0; }
+    to { transform: scaleY(1); opacity: 1; }
+  }
+
+  /* Premium badge — replaces "VERSION GRATUITA" */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.58rem;
+    font-weight: 300;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+
+  .eyebrow-gem {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Title */
+  .title-wrap {
+    position: relative;
+    text-align: center;
+    animation: fadeUp 0.9s 0.7s cubic-bezier(0.22,1,0.36,1) both;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    font-size: clamp(5rem, 22vw, 10rem);
+    position: relative;
+  }
+
+  /* "Only" — outline */
+  h1 .only {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--stroke);
+  }
+
+  /* "Red" — solid */
+  h1 .red-word {
+    display: block;
+    color: var(--red);
+    margin-top: -0.05em;
+    position: relative;
+    filter: drop-shadow(0 0 40px rgba(192,57,43,0.35));
+  }
+
+  /* Shadow clone */
+  h1 .red-word::after {
+    content: 'Red';
+    position: absolute;
+    inset: 0;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--red);
+    transform: translate(3px, 3px);
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  /* Premium label — top right of title */
+  .premium-badge {
+    position: absolute;
+    top: 6px;
+    right: -3.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.5rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    padding: 2px 6px;
+    line-height: 1.7;
+    white-space: nowrap;
+    opacity: 0.85;
+  }
+
+  /* Ornament divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 32px 0 36px;
+    width: 220px;
+    animation: fadeUp 0.8s 1s ease both;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--card-border));
+  }
+
+  .divider-line.right {
+    background: linear-gradient(to left, transparent, var(--card-border));
+  }
+
+  .divider-ornament {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .d-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .d-diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--red);
+    transform: rotate(45deg);
+    box-shadow: 0 0 12px var(--red);
+  }
+
+  /* Tagline under divider */
+  .tagline {
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    animation: fadeUp 0.8s 1.05s ease both;
+    margin-top: -20px;
+    margin-bottom: 36px;
+  }
+
+  /* ── Premium access panel ── */
+  .access-panel {
+    animation: fadeUp 0.9s 1.15s cubic-bezier(0.22,1,0.36,1) both;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* Decorative corner marks around panel */
+  .corner-marks {
+    position: absolute;
+    inset: -16px;
+    pointer-events: none;
+  }
+
+  .corner {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: var(--red-line);
+    border-style: solid;
+    opacity: 0.6;
+  }
+
+  .corner.tl { top: 0; left: 0; border-width: 1px 0 0 1px; }
+  .corner.tr { top: 0; right: 0; border-width: 1px 1px 0 0; }
+  .corner.bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+  .corner.br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+  /* Membership info */
+  .membership-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.9;
+  }
+
+  .membership-line::before,
+  .membership-line::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  /* Pulsing crown icon area */
+  .crown-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+  }
+
+  .crown-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid var(--red-line);
+    animation: ringPulse 3s ease-in-out infinite;
+  }
+
+  .crown-ring-2 {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    opacity: 0.25;
+    animation: ringPulse 3s 1.5s ease-in-out infinite;
+  }
+
+  @keyframes ringPulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.08); opacity: 1; }
+  }
+
+  .crown-inner {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  /* Bottom accent */
+  .bottom-pin {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 44px;
+    background: linear-gradient(to bottom, var(--red-line), transparent);
+    z-index: 1;
+  }
+
+  /* Side accent lines */
+  .side-accent {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 120px;
+    z-index: 1;
+    animation: fadeIn 1.5s 1.5s ease both;
+  }
+
+  .side-accent.left {
+    left: 24px;
+    background: linear-gradient(to bottom, transparent, var(--red-line), transparent);
+  }
+
+  .side-accent.right {
+    right: 24px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    opacity: 0.3;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Subtle floating particles */
+  .particle {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: var(--red);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    animation: floatUp linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(-60vh) scale(0); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layer">
+  <div class="bg-orb"></div>
+  <div class="bg-orb-2"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-grain"></div>
+</div>
+
+<div class="side-accent left"></div>
+<div class="side-accent right"></div>
+
+<div class="stage">
+  <div class="vert-line"></div>
+
+  <div class="eyebrow">
+    <!-- Gem SVG -->
+    <svg class="eyebrow-gem" viewBox="0 0 16 16" fill="none">
+      <path d="M8 1L14 5.5L11.5 14H4.5L2 5.5L8 1Z" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linejoin="round"/>
+      <path d="M2 5.5H14M8 1L5.5 5.5M8 1L10.5 5.5M4.5 14L5.5 5.5M11.5 14L10.5 5.5" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
+    </svg>
+    Versión Premium
+    <svg class="eyebrow-gem" viewBox="0 0 16 16" fill="none">
+      <path d="M8 1L14 5.5L11.5 14H4.5L2 5.5L8 1Z" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linejoin="round"/>
+      <path d="M2 5.5H14M8 1L5.5 5.5M8 1L10.5 5.5M4.5 14L5.5 5.5M11.5 14L10.5 5.5" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <div class="title-wrap">
+    <h1>
+      <span class="only">Only</span>
+      <span class="red-word">Red</span>
+    </h1>
+    <span class="premium-badge">Premium</span>
+  </div>
+
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-ornament">
+      <div class="d-dot"></div>
+      <div class="d-diamond"></div>
+      <div class="d-dot"></div>
+    </div>
+    <div class="divider-line right"></div>
+  </div>
+
+  <div class="tagline">Acceso completo · Edición exclusiva</div>
+
+  <div class="access-panel">
+    <div class="corner-marks">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+    </div>
+
+    <div class="crown-wrap">
+      <div class="crown-ring"></div>
+      <div class="crown-ring-2"></div>
+      <div class="crown-inner">
+        <!-- Crown SVG -->
+        <svg width="22" height="18" viewBox="0 0 22 18" fill="none">
+          <path d="M1 17L3 7L7.5 12L11 2L14.5 12L19 7L21 17H1Z"
+            fill="none"
+            stroke="var(--gold)"
+            stroke-width="1.2"
+            stroke-linejoin="round"
+            stroke-linecap="round"/>
+          <circle cx="11" cy="2" r="1" fill="var(--red)"/>
+          <circle cx="1" cy="17" r="0.8" fill="var(--gold)" opacity="0.5"/>
+          <circle cx="21" cy="17" r="0.8" fill="var(--gold)" opacity="0.5"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="membership-line">Miembro Activo</div>
+  </div>
+</div>
+
+<div class="bottom-pin"></div>
+
+<script>
+  // Subtle floating particles for premium atmosphere
+  function spawnParticle() {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.bottom = '0';
+    const dur = 6 + Math.random() * 10;
+    const delay = Math.random() * 4;
+    p.style.animationDuration = dur + 's';
+    p.style.animationDelay = delay + 's';
+    p.style.background = Math.random() > 0.5
+      ? 'var(--red)'
+      : 'var(--gold)';
+    p.style.opacity = '0';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), (dur + delay) * 1000);
+  }
+
+  // Spawn particles periodically
+  setInterval(spawnParticle, 1200);
+
+  // Initial burst
+  for (let i = 0; i < 5; i++) {
+    setTimeout(spawnParticle, i * 300);
+  }
+</script>
+</body>
+</html>
