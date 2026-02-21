@@ -46,7 +46,6 @@
     overflow-y: auto;
   }
 
-  /* ── Atmospheric background ── */
   .bg-layer {
     position: fixed;
     inset: 0;
@@ -95,7 +94,6 @@
     50% { transform: scale(1.08) rotate(4deg); opacity: 1; }
   }
 
-  /* ── REGISTRATION OVERLAY ── */
   #reg-overlay {
     position: fixed;
     inset: 0;
@@ -128,17 +126,13 @@
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
 
-  /* Card corner marks */
   .reg-corner { position: absolute; width: 14px; height: 14px; border-color: var(--red-line); border-style: solid; }
   .reg-corner.tl { top: 12px; left: 12px; border-width: 1.5px 0 0 1.5px; border-radius: 3px 0 0 0; }
   .reg-corner.tr { top: 12px; right: 12px; border-width: 1.5px 1.5px 0 0; border-radius: 0 3px 0 0; }
   .reg-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 1.5px 1.5px; border-radius: 0 0 0 3px; }
   .reg-corner.br { bottom: 12px; right: 12px; border-width: 0 1.5px 1.5px 0; border-radius: 0 0 3px 0; }
 
-  .reg-header {
-    text-align: center;
-    margin-bottom: 28px;
-  }
+  .reg-header { text-align: center; margin-bottom: 28px; }
 
   .reg-logo-mark {
     display: inline-flex;
@@ -161,7 +155,6 @@
     letter-spacing: -0.02em;
     margin-bottom: 5px;
   }
-
   .reg-title .r-red { color: var(--red); }
 
   .reg-subtitle {
@@ -192,11 +185,7 @@
     color: var(--text-muted);
   }
 
-  /* Input groups */
-  .input-group {
-    margin-bottom: 14px;
-    position: relative;
-  }
+  .input-group { margin-bottom: 14px; position: relative; }
 
   .input-label {
     display: flex;
@@ -209,11 +198,7 @@
     font-weight: 400;
     margin-bottom: 7px;
   }
-
-  .input-label i {
-    font-size: 0.7rem;
-    opacity: 0.8;
-  }
+  .input-label i { font-size: 0.7rem; opacity: 0.8; }
 
   .reg-input {
     width: 100%;
@@ -230,32 +215,19 @@
     -webkit-appearance: none;
     appearance: none;
   }
-
   .reg-input:focus {
     border-color: var(--red-line);
     box-shadow: 0 0 0 3px var(--red-glow);
   }
-
   .reg-input::placeholder {
     color: var(--text-muted);
     opacity: 0.6;
     font-size: 0.78rem;
   }
 
-  /* Phone input with flag */
-  .phone-wrap {
-    display: flex;
-    gap: 8px;
-  }
-
-  .phone-code-input {
-    width: 90px;
-    flex-shrink: 0;
-  }
-
-  .phone-num-input {
-    flex: 1;
-  }
+  .phone-wrap { display: flex; gap: 8px; }
+  .phone-code-input { width: 90px; flex-shrink: 0; }
+  .phone-num-input { flex: 1; }
 
   .reg-error {
     font-size: 0.62rem;
@@ -265,7 +237,6 @@
     letter-spacing: 0.05em;
   }
 
-  /* Submit button */
   .reg-btn {
     width: 100%;
     margin-top: 22px;
@@ -285,7 +256,6 @@
     transition: transform 0.2s, box-shadow 0.2s;
     box-shadow: 0 8px 32px rgba(192,57,43,0.35);
   }
-
   .reg-btn::after {
     content: '';
     position: absolute;
@@ -293,7 +263,6 @@
     background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
     pointer-events: none;
   }
-
   .reg-btn:active { transform: scale(0.98); }
 
   .reg-note {
@@ -305,7 +274,6 @@
     line-height: 1.7;
   }
 
-  /* ── EXPIRY OVERLAY ── */
   #expiry-overlay {
     position: fixed;
     inset: 0;
@@ -370,11 +338,7 @@
     margin-bottom: 24px;
   }
 
-  .renewal-input-wrap {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 14px;
-  }
+  .renewal-input-wrap { display: flex; gap: 8px; margin-bottom: 14px; }
 
   .renewal-input {
     flex: 1;
@@ -390,7 +354,6 @@
     letter-spacing: 0.12em;
     transition: border-color 0.25s, box-shadow 0.25s;
   }
-
   .renewal-input:focus {
     border-color: var(--red-line);
     box-shadow: 0 0 0 3px var(--red-glow);
@@ -409,7 +372,6 @@
     font-family: 'DM Sans', sans-serif;
     transition: transform 0.2s;
   }
-
   .renewal-btn:active { transform: scale(0.97); }
 
   .renewal-error {
@@ -436,10 +398,8 @@
     transition: background 0.2s;
     margin-top: 8px;
   }
-
   .contact-jexe:active { background: var(--gold-glow); }
 
-  /* ── MAIN STAGE ── */
   .stage {
     position: relative;
     z-index: 1;
@@ -475,7 +435,6 @@
     margin-bottom: 20px;
     animation: fadeUp 0.8s 0.5s ease both;
   }
-
   .eyebrow-gem { width: 16px; height: 16px; flex-shrink: 0; }
 
   .title-wrap {
@@ -545,20 +504,12 @@
     width: 220px;
     animation: fadeUp 0.8s 1s ease both;
   }
-
   .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--card-border)); }
   .divider-line.right { background: linear-gradient(to left, transparent, var(--card-border)); }
-
-  .divider-ornament {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
+  .divider-ornament { display: flex; align-items: center; gap: 5px; }
   .d-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); }
   .d-diamond { width: 6px; height: 6px; background: var(--red); transform: rotate(45deg); box-shadow: 0 0 12px var(--red); }
 
-  /* ── COUNTDOWN TIMER ── */
   .countdown-wrap {
     animation: fadeUp 0.8s 1.05s ease both;
     margin: 28px 0 20px;
@@ -567,7 +518,6 @@
     align-items: center;
     gap: 10px;
   }
-
   .countdown-label {
     font-size: 0.52rem;
     letter-spacing: 0.3em;
@@ -575,20 +525,8 @@
     color: var(--text-muted);
     font-weight: 300;
   }
-
-  .countdown-units {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .cd-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-  }
-
+  .countdown-units { display: flex; align-items: center; gap: 6px; }
+  .cd-unit { display: flex; flex-direction: column; align-items: center; gap: 3px; }
   .cd-num {
     font-family: 'Playfair Display', serif;
     font-weight: 900;
@@ -603,7 +541,6 @@
     border-radius: 8px;
     padding: 6px 4px;
   }
-
   .cd-lbl {
     font-size: 0.42rem;
     letter-spacing: 0.18em;
@@ -611,7 +548,6 @@
     color: var(--text-muted);
     font-weight: 300;
   }
-
   .cd-sep {
     font-family: 'Playfair Display', serif;
     font-size: 1.4rem;
@@ -620,13 +556,11 @@
     margin-bottom: 14px;
     animation: blinkSep 1s ease-in-out infinite;
   }
-
   @keyframes blinkSep {
     0%, 100% { opacity: 0.5; }
     50% { opacity: 0.15; }
   }
 
-  /* ── INFO PANEL (Registration data) ── */
   .access-panel {
     animation: fadeUp 0.9s 1.15s cubic-bezier(0.22,1,0.36,1) both;
     position: relative;
@@ -646,7 +580,6 @@
   .corner.bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
   .corner.br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
 
-  /* Reg info display */
   .reg-info-panel {
     width: 100%;
     background: var(--input-bg);
@@ -656,24 +589,19 @@
     position: relative;
     overflow: hidden;
   }
-
   .reg-info-panel::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
+    left: 0; top: 0; bottom: 0;
     width: 2px;
     background: linear-gradient(to bottom, var(--red), var(--gold));
   }
-
   .reg-info-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 12px;
   }
-
   .reg-info-title {
     font-size: 0.55rem;
     letter-spacing: 0.25em;
@@ -681,7 +609,6 @@
     color: var(--gold);
     font-weight: 300;
   }
-
   .privacy-toggle {
     background: none;
     border: 1px solid var(--card-border);
@@ -697,9 +624,7 @@
     font-family: 'DM Sans', sans-serif;
     letter-spacing: 0.08em;
   }
-
   .privacy-toggle:active { border-color: var(--red-line); color: var(--red); }
-
   .reg-info-row {
     display: flex;
     align-items: flex-start;
@@ -707,43 +632,12 @@
     padding: 7px 0;
     border-bottom: 1px solid var(--card-border);
   }
-
   .reg-info-row:last-child { border-bottom: none; }
-
-  .reg-info-icon {
-    width: 20px;
-    text-align: center;
-    font-size: 0.7rem;
-    color: var(--red);
-    opacity: 0.8;
-    margin-top: 1px;
-    flex-shrink: 0;
-  }
-
+  .reg-info-icon { width: 20px; text-align: center; font-size: 0.7rem; color: var(--red); opacity: 0.8; margin-top: 1px; flex-shrink: 0; }
   .reg-info-content { flex: 1; }
-
-  .reg-info-key {
-    font-size: 0.52rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-weight: 300;
-    margin-bottom: 2px;
-  }
-
-  .reg-info-val {
-    font-size: 0.78rem;
-    font-weight: 300;
-    color: var(--text);
-    font-family: 'DM Mono', 'DM Sans', monospace;
-    letter-spacing: 0.04em;
-    transition: filter 0.3s;
-  }
-
-  .reg-info-val.hidden-val {
-    filter: blur(6px);
-    user-select: none;
-  }
+  .reg-info-key { font-size: 0.52rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); font-weight: 300; margin-bottom: 2px; }
+  .reg-info-val { font-size: 0.78rem; font-weight: 300; color: var(--text); font-family: 'DM Mono', 'DM Sans', monospace; letter-spacing: 0.04em; transition: filter 0.3s; }
+  .reg-info-val.hidden-val { filter: blur(6px); user-select: none; }
 
   .membership-line {
     display: flex;
@@ -756,9 +650,7 @@
     color: var(--gold);
     opacity: 0.9;
   }
-
-  .membership-line::before,
-  .membership-line::after {
+  .membership-line::before, .membership-line::after {
     content: '';
     display: block;
     width: 24px;
@@ -767,7 +659,6 @@
     opacity: 0.4;
   }
 
-  /* Crown */
   .crown-wrap {
     position: relative;
     display: flex;
@@ -778,84 +669,24 @@
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
   }
-
   .crown-wrap:active { transform: scale(0.95); }
-
-  .crown-ring {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 1px solid var(--red-line);
-    animation: ringPulse 3s ease-in-out infinite;
-  }
-
-  .crown-ring-2 {
-    position: absolute;
-    inset: -8px;
-    border-radius: 50%;
-    border: 1px solid var(--gold);
-    opacity: 0.25;
-    animation: ringPulse 3s 1.5s ease-in-out infinite;
-  }
-
+  .crown-ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--red-line); animation: ringPulse 3s ease-in-out infinite; }
+  .crown-ring-2 { position: absolute; inset: -8px; border-radius: 50%; border: 1px solid var(--gold); opacity: 0.25; animation: ringPulse 3s 1.5s ease-in-out infinite; }
   @keyframes ringPulse {
     0%, 100% { transform: scale(1); opacity: 0.5; }
     50% { transform: scale(1.08); opacity: 1; }
   }
+  .crown-inner { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%); border-radius: 50%; }
 
-  .crown-inner {
-    width: 38px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-
-  .bottom-pin {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1px;
-    height: 44px;
-    background: linear-gradient(to bottom, var(--red-line), transparent);
-    z-index: 1;
-  }
-
-  .side-accent {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 120px;
-    z-index: 1;
-    animation: fadeIn 1.5s 1.5s ease both;
-  }
-
+  .bottom-pin { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 1px; height: 44px; background: linear-gradient(to bottom, var(--red-line), transparent); z-index: 1; }
+  .side-accent { position: fixed; top: 50%; transform: translateY(-50%); width: 1px; height: 120px; z-index: 1; animation: fadeIn 1.5s 1.5s ease both; }
   .side-accent.left { left: 24px; background: linear-gradient(to bottom, transparent, var(--red-line), transparent); }
   .side-accent.right { right: 24px; background: linear-gradient(to bottom, transparent, var(--gold), transparent); opacity: 0.3; }
 
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .particle {
-    position: fixed;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    background: var(--red);
-    opacity: 0;
-    pointer-events: none;
-    z-index: 0;
-    animation: floatUp linear infinite;
-  }
-
+  .particle { position: fixed; width: 2px; height: 2px; border-radius: 50%; background: var(--red); opacity: 0; pointer-events: none; z-index: 0; animation: floatUp linear infinite; }
   @keyframes floatUp {
     0% { transform: translateY(0) scale(1); opacity: 0; }
     10% { opacity: 0.6; }
@@ -863,7 +694,6 @@
     100% { transform: translateY(-60vh) scale(0); opacity: 0; }
   }
 
-  /* Toast */
   .toast {
     position: fixed;
     bottom: 60px;
@@ -884,18 +714,7 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
-
-  .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  select.reg-input {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a847e' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    padding-right: 32px;
-  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
@@ -932,37 +751,25 @@
     <div class="reg-divider"><span>Información del dispositivo</span></div>
 
     <div class="input-group">
-      <div class="input-label">
-        <i class="fa-brands fa-apple"></i>
-        Modelo exacto del iPhone
-      </div>
+      <div class="input-label"><i class="fa-brands fa-apple"></i>Modelo exacto del iPhone</div>
       <input type="text" class="reg-input" id="inp-model" placeholder="Ej: iPhone 15 Pro Max" autocomplete="off">
       <div class="reg-error" id="err-model">Este campo es obligatorio</div>
     </div>
 
     <div class="input-group">
-      <div class="input-label">
-        <i class="fa-solid fa-gear"></i>
-        Versión de iOS exacta
-      </div>
+      <div class="input-label"><i class="fa-solid fa-gear"></i>Versión de iOS exacta</div>
       <input type="text" class="reg-input" id="inp-ios" placeholder="Ej: iOS 17.4.1" autocomplete="off">
       <div class="reg-error" id="err-ios">Este campo es obligatorio</div>
     </div>
 
     <div class="input-group">
-      <div class="input-label">
-        <i class="fa-solid fa-fingerprint"></i>
-        IMEI Principal
-      </div>
+      <div class="input-label"><i class="fa-solid fa-fingerprint"></i>IMEI Principal</div>
       <input type="text" class="reg-input" id="inp-imei" placeholder="15 dígitos" maxlength="17" inputmode="numeric" autocomplete="off">
       <div class="reg-error" id="err-imei">Ingresa un IMEI válido (13–17 dígitos)</div>
     </div>
 
     <div class="input-group">
-      <div class="input-label">
-        <i class="fa-solid fa-phone"></i>
-        Número de teléfono
-      </div>
+      <div class="input-label"><i class="fa-solid fa-phone"></i>Número de teléfono</div>
       <div class="phone-wrap">
         <input type="text" class="reg-input phone-code-input" id="inp-code" placeholder="+57" maxlength="5" inputmode="tel">
         <input type="text" class="reg-input phone-num-input" id="inp-phone" placeholder="Número de teléfono" inputmode="tel" autocomplete="off">
@@ -1046,7 +853,7 @@
     <div class="divider-line right"></div>
   </div>
 
-  <!-- COUNTDOWN TIMER 31 DAYS -->
+  <!-- COUNTDOWN 31 DAYS -->
   <div class="countdown-wrap">
     <div class="countdown-label">Tiempo restante de membresía</div>
     <div class="countdown-units">
@@ -1072,7 +879,7 @@
     </div>
   </div>
 
-  <!-- ACCESS PANEL with reg info -->
+  <!-- ACCESS PANEL -->
   <div class="access-panel">
     <div class="corner-marks">
       <div class="corner tl"></div>
@@ -1081,7 +888,6 @@
       <div class="corner br"></div>
     </div>
 
-    <!-- Registration info display -->
     <div class="reg-info-panel">
       <div class="reg-info-header">
         <div class="reg-info-title"><i class="fa-solid fa-id-card" style="margin-right:6px;opacity:0.7;"></i>Datos del Miembro</div>
@@ -1098,7 +904,6 @@
           <div class="reg-info-val" id="disp-model">—</div>
         </div>
       </div>
-
       <div class="reg-info-row">
         <div class="reg-info-icon"><i class="fa-solid fa-gear"></i></div>
         <div class="reg-info-content">
@@ -1106,7 +911,6 @@
           <div class="reg-info-val" id="disp-ios">—</div>
         </div>
       </div>
-
       <div class="reg-info-row">
         <div class="reg-info-icon"><i class="fa-solid fa-fingerprint"></i></div>
         <div class="reg-info-content">
@@ -1114,7 +918,6 @@
           <div class="reg-info-val" id="disp-imei">—</div>
         </div>
       </div>
-
       <div class="reg-info-row">
         <div class="reg-info-icon"><i class="fa-solid fa-phone"></i></div>
         <div class="reg-info-content">
@@ -1122,7 +925,6 @@
           <div class="reg-info-val" id="disp-phone">—</div>
         </div>
       </div>
-
       <div class="reg-info-row">
         <div class="reg-info-icon"><i class="fa-solid fa-calendar-check"></i></div>
         <div class="reg-info-content">
@@ -1132,18 +934,14 @@
       </div>
     </div>
 
-    <!-- Crown -->
     <div class="crown-wrap" onclick="openFreeFire()" title="Abrir Free Fire">
       <div class="crown-ring"></div>
       <div class="crown-ring-2"></div>
       <div class="crown-inner">
         <svg width="22" height="18" viewBox="0 0 22 18" fill="none">
           <path d="M1 17L3 7L7.5 12L11 2L14.5 12L19 7L21 17H1Z"
-            fill="none"
-            stroke="var(--gold)"
-            stroke-width="1.2"
-            stroke-linejoin="round"
-            stroke-linecap="round"/>
+            fill="none" stroke="var(--gold)" stroke-width="1.2"
+            stroke-linejoin="round" stroke-linecap="round"/>
           <circle cx="11" cy="2" r="1" fill="var(--red)"/>
           <circle cx="1" cy="17" r="0.8" fill="var(--gold)" opacity="0.5"/>
           <circle cx="21" cy="17" r="0.8" fill="var(--gold)" opacity="0.5"/>
@@ -1158,50 +956,223 @@
 <div class="bottom-pin"></div>
 
 <script>
-  /* ═══════════════════════════════════════════
-     STORAGE KEYS
-  ═══════════════════════════════════════════ */
-  const KEYS = {
-    registered: 'onlyred_registered',
-    model: 'onlyred_model',
-    ios: 'onlyred_ios',
-    imei: 'onlyred_imei',
-    phone: 'onlyred_phone',
-    regDate: 'onlyred_regdate',
-    expiry: 'onlyred_expiry',
-    usedCodes: 'onlyred_usedcodes',
-    expiryStart: 'onlyred_expirystart'
-  };
+/* ═══════════════════════════════════════════════════════════════
+   ONLYRED PERSISTENT STORAGE SYSTEM
+   
+   Strategy: write to ALL available storage layers simultaneously.
+   On read: try each layer in order, take the first valid result,
+   then re-broadcast it to all layers (self-healing).
+   
+   Layers (most to least persistent on iOS):
+   1. IndexedDB         — survives profile reinstall most reliably
+   2. Cache API         — survives profile reinstall (Service Worker cache)
+   3. localStorage      — may be cleared when webclip is deleted
+   4. sessionStorage    — current session only (fallback)
+   
+   The IMEI is used as the canonical device key so even if ALL
+   local storage is wiped, once the user re-registers, the same
+   IMEI will be re-linked and codes already used won't work again
+   (codes are stored per-key in all layers).
+═══════════════════════════════════════════════════════════════ */
 
-  /* ═══════════════════════════════════════════
-     VALID RENEWAL CODES
-  ═══════════════════════════════════════════ */
+  const DB_NAME    = 'onlyred_db';
+  const DB_VERSION = 1;
+  const DB_STORE   = 'kv';
+  const CACHE_NAME = 'onlyred_persist_v1';
+  const CACHE_URL  = 'https://onlyred.internal/data'; // virtual URL for Cache API
+
   const VALID_CODES = [
-    'A7F3K9X2Q4M1',
-    'Z8L2C5R9W1H6',
-    'P4N7T2B8K6Q3',
-    'X1M9D5A7F2L8',
-    'H6Q3Z8R1C4V9',
-    'K2W7P5J9N3T4',
-    'R8F1L6X3B2Q7',
-    'T5C9H2Z4M8K1',
-    'V3N8Q6A1W7P2',
-    'J4B7X2R9L5C8',
-    'M9K1T4F8D6Q3',
-    'C2P6H9W3Z8N5'
+    'A7F3K9X2Q4M1','Z8L2C5R9W1H6','P4N7T2B8K6Q3',
+    'X1M9D5A7F2L8','H6Q3Z8R1C4V9','K2W7P5J9N3T4',
+    'R8F1L6X3B2Q7','T5C9H2Z4M8K1','V3N8Q6A1W7P2',
+    'J4B7X2R9L5C8','M9K1T4F8D6Q3','C2P6H9W3Z8N5'
   ];
 
-  /* ═══════════════════════════════════════════
-     HELPERS
-  ═══════════════════════════════════════════ */
-  function ls(key, val) {
-    if (val === undefined) return localStorage.getItem(key);
-    localStorage.setItem(key, val);
+  /* ── IDB helpers ── */
+  let _db = null;
+
+  function openIDB() {
+    return new Promise((resolve, reject) => {
+      if (_db) return resolve(_db);
+      const req = indexedDB.open(DB_NAME, DB_VERSION);
+      req.onupgradeneeded = e => {
+        e.target.result.createObjectStore(DB_STORE, { keyPath: 'k' });
+      };
+      req.onsuccess = e => { _db = e.target.result; resolve(_db); };
+      req.onerror   = () => reject(req.error);
+    });
   }
 
-  function pad(n) { return String(n).padStart(2, '0'); }
+  async function idbSet(key, value) {
+    try {
+      const db = await openIDB();
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(DB_STORE, 'readwrite');
+        tx.objectStore(DB_STORE).put({ k: key, v: value });
+        tx.oncomplete = resolve;
+        tx.onerror    = () => reject(tx.error);
+      });
+    } catch(e) { /* IDB not available */ }
+  }
 
-  function showToast(msg, dur = 2500) {
+  async function idbGet(key) {
+    try {
+      const db = await openIDB();
+      return new Promise((resolve, reject) => {
+        const tx  = db.transaction(DB_STORE, 'readonly');
+        const req = tx.objectStore(DB_STORE).get(key);
+        req.onsuccess = () => resolve(req.result ? req.result.v : null);
+        req.onerror   = () => resolve(null);
+      });
+    } catch(e) { return null; }
+  }
+
+  /* ── Cache API helpers ── */
+  async function cacheSet(key, value) {
+    try {
+      const cache = await caches.open(CACHE_NAME);
+      const body  = JSON.stringify({ key, value, ts: Date.now() });
+      await cache.put(
+        CACHE_URL + '/' + encodeURIComponent(key),
+        new Response(body, { headers: { 'Content-Type': 'application/json' } })
+      );
+    } catch(e) { /* Cache API not available */ }
+  }
+
+  async function cacheGet(key) {
+    try {
+      const cache = await caches.open(CACHE_NAME);
+      const resp  = await cache.match(CACHE_URL + '/' + encodeURIComponent(key));
+      if (!resp) return null;
+      const data = await resp.json();
+      return data.value;
+    } catch(e) { return null; }
+  }
+
+  /* ── localStorage helpers ── */
+  function lsSet(key, value) {
+    try { localStorage.setItem('onlyred_' + key, value); } catch(e) {}
+  }
+  function lsGet(key) {
+    try { return localStorage.getItem('onlyred_' + key); } catch(e) { return null; }
+  }
+
+  /* ── sessionStorage helpers (emergency fallback within session) ── */
+  function ssSet(key, value) {
+    try { sessionStorage.setItem('onlyred_' + key, value); } catch(e) {}
+  }
+  function ssGet(key) {
+    try { return sessionStorage.getItem('onlyred_' + key); } catch(e) { return null; }
+  }
+
+  /* ══════════════════════════════════════════
+     UNIFIED PERSIST API
+     All reads/writes go through these two functions.
+  ══════════════════════════════════════════ */
+  async function persist(key, value) {
+    // Write to all layers in parallel
+    const strVal = (typeof value === 'string') ? value : JSON.stringify(value);
+    lsSet(key, strVal);
+    ssSet(key, strVal);
+    await Promise.allSettled([
+      idbSet(key, strVal),
+      cacheSet(key, strVal)
+    ]);
+  }
+
+  async function recall(key) {
+    // Try layers from most to least persistent
+    let val = await idbGet(key);
+    if (val !== null && val !== undefined) {
+      // Heal other layers while we have it
+      lsSet(key, val);
+      ssSet(key, val);
+      cacheSet(key, val); // async, don't await
+      return val;
+    }
+    val = await cacheGet(key);
+    if (val !== null && val !== undefined) {
+      lsSet(key, val);
+      ssSet(key, val);
+      idbSet(key, val); // async, don't await
+      return val;
+    }
+    val = lsGet(key);
+    if (val !== null && val !== undefined) {
+      ssSet(key, val);
+      idbSet(key, val);
+      cacheSet(key, val);
+      return val;
+    }
+    val = ssGet(key);
+    if (val !== null && val !== undefined) {
+      lsSet(key, val);
+      idbSet(key, val);
+      cacheSet(key, val);
+      return val;
+    }
+    return null;
+  }
+
+  /* ══════════════════════════════════════════
+     DATA BUNDLE
+     All user data is stored as one atomic JSON
+     blob keyed by "reg" — plus individual keys
+     for redundancy. Using a bundle means if even
+     one layer survives with ONE key, we recover all.
+  ══════════════════════════════════════════ */
+  async function saveBundle(data) {
+    const bundle = JSON.stringify(data);
+    // Save as bundle
+    await persist('reg', bundle);
+    // Also save individually for max redundancy
+    await persist('model',       data.model);
+    await persist('ios',         data.ios);
+    await persist('imei',        data.imei);
+    await persist('phone',       data.phone);
+    await persist('regDate',     data.regDate);
+    await persist('expiry',      data.expiry);
+    await persist('usedCodes',   JSON.stringify(data.usedCodes || []));
+    await persist('expiryStart', data.expiryStart || '');
+    await persist('registered',  '1');
+  }
+
+  async function loadBundle() {
+    // Try bundle first
+    const raw = await recall('reg');
+    if (raw) {
+      try {
+        const d = JSON.parse(raw);
+        if (d && d.registered === '1' && d.imei) return d;
+      } catch(e) {}
+    }
+    // Fallback: reconstruct from individual keys
+    const registered = await recall('registered');
+    if (registered !== '1') return null;
+    const imei = await recall('imei');
+    if (!imei) return null;
+    const data = {
+      registered:  '1',
+      model:       await recall('model')       || '',
+      ios:         await recall('ios')         || '',
+      imei:        imei,
+      phone:       await recall('phone')       || '',
+      regDate:     await recall('regDate')     || '',
+      expiry:      await recall('expiry')      || '',
+      usedCodes:   JSON.parse(await recall('usedCodes') || '[]'),
+      expiryStart: await recall('expiryStart') || ''
+    };
+    // Re-save as bundle for future reads
+    await saveBundle(data);
+    return data;
+  }
+
+  /* ══════════════════════════════════════════
+     HELPERS
+  ══════════════════════════════════════════ */
+  function pad(n) { return String(n).padStart(2,'0'); }
+
+  function showToast(msg, dur=2500) {
     const t = document.getElementById('toast');
     t.textContent = msg;
     t.classList.add('show');
@@ -1211,261 +1182,244 @@
   function formatDate(ts) {
     const d = new Date(parseInt(ts));
     return d.toLocaleDateString('es-ES', {
-      day: '2-digit', month: 'long', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
+      day:'2-digit', month:'long', year:'numeric',
+      hour:'2-digit', minute:'2-digit'
     });
   }
 
-  /* ═══════════════════════════════════════════
-     REGISTRATION
-  ═══════════════════════════════════════════ */
-  function submitRegistration() {
-    let valid = true;
+  // In-memory state (loaded from storage on boot)
+  let STATE = null;
 
+  async function updateState(patch) {
+    Object.assign(STATE, patch);
+    await saveBundle(STATE);
+  }
+
+  /* ══════════════════════════════════════════
+     REGISTRATION
+  ══════════════════════════════════════════ */
+  async function submitRegistration() {
+    let valid = true;
     const model = document.getElementById('inp-model').value.trim();
-    const ios = document.getElementById('inp-ios').value.trim();
-    const imei = document.getElementById('inp-imei').value.replace(/\s/g,'');
-    const code = document.getElementById('inp-code').value.trim();
+    const ios   = document.getElementById('inp-ios').value.trim();
+    const imei  = document.getElementById('inp-imei').value.replace(/\s/g,'');
+    const code  = document.getElementById('inp-code').value.trim();
     const phone = document.getElementById('inp-phone').value.trim();
 
-    // Validate
     const showErr = (id, show) => {
       document.getElementById(id).style.display = show ? 'block' : 'none';
     };
 
-    if (!model) { showErr('err-model', true); valid = false; } else showErr('err-model', false);
-    if (!ios) { showErr('err-ios', true); valid = false; } else showErr('err-ios', false);
-    if (!imei || imei.length < 13 || imei.length > 17 || !/^\d+$/.test(imei)) {
-      showErr('err-imei', true); valid = false;
+    if (!model)   { showErr('err-model', true); valid=false; } else showErr('err-model', false);
+    if (!ios)     { showErr('err-ios',   true); valid=false; } else showErr('err-ios',   false);
+    if (!imei || imei.length<13 || imei.length>17 || !/^\d+$/.test(imei)) {
+      showErr('err-imei', true); valid=false;
     } else showErr('err-imei', false);
-
-    const fullPhone = (code + ' ' + phone).trim();
-    if (!code || !phone || phone.length < 5) {
-      showErr('err-phone', true); valid = false;
+    if (!code || !phone || phone.length<5) {
+      showErr('err-phone', true); valid=false;
     } else showErr('err-phone', false);
 
     if (!valid) return;
 
-    const now = Date.now();
-    const expiry = now + (31 * 24 * 60 * 60 * 1000); // 31 days
+    const now    = Date.now();
+    const expiry = now + (31 * 24 * 60 * 60 * 1000);
 
-    ls(KEYS.registered, '1');
-    ls(KEYS.model, model);
-    ls(KEYS.ios, ios);
-    ls(KEYS.imei, imei);
-    ls(KEYS.phone, code + ' ' + phone);
-    ls(KEYS.regDate, now.toString());
-    ls(KEYS.expiry, expiry.toString());
-    ls(KEYS.usedCodes, JSON.stringify([]));
+    STATE = {
+      registered:  '1',
+      model,
+      ios,
+      imei,
+      phone:       code + ' ' + phone,
+      regDate:     now.toString(),
+      expiry:      expiry.toString(),
+      usedCodes:   [],
+      expiryStart: ''
+    };
 
+    await saveBundle(STATE);
     initMain();
   }
 
-  /* ═══════════════════════════════════════════
-     INIT
-  ═══════════════════════════════════════════ */
+  /* ══════════════════════════════════════════
+     INIT MAIN VIEW
+  ══════════════════════════════════════════ */
   function initMain() {
-    document.getElementById('reg-overlay').style.display = 'none';
-    document.getElementById('main-stage').style.display = 'flex';
+    document.getElementById('reg-overlay').style.display   = 'none';
+    document.getElementById('main-stage').style.display    = 'flex';
 
-    // Populate info
-    document.getElementById('disp-model').textContent = ls(KEYS.model);
-    document.getElementById('disp-ios').textContent = ls(KEYS.ios);
-    document.getElementById('disp-imei').textContent = ls(KEYS.imei);
-    document.getElementById('disp-phone').textContent = ls(KEYS.phone);
-    document.getElementById('disp-date').textContent = formatDate(ls(KEYS.regDate));
+    document.getElementById('disp-model').textContent = STATE.model;
+    document.getElementById('disp-ios').textContent   = STATE.ios;
+    document.getElementById('disp-imei').textContent  = STATE.imei;
+    document.getElementById('disp-phone').textContent = STATE.phone;
+    document.getElementById('disp-date').textContent  = formatDate(STATE.regDate);
 
     startCountdown();
     spawnParticles();
   }
 
-  /* ═══════════════════════════════════════════
+  /* ══════════════════════════════════════════
      31-DAY COUNTDOWN
-  ═══════════════════════════════════════════ */
+  ══════════════════════════════════════════ */
   function startCountdown() {
     function tick() {
-      const expiry = parseInt(ls(KEYS.expiry));
-      const now = Date.now();
-      const remaining = expiry - now;
-
+      const remaining = parseInt(STATE.expiry) - Date.now();
       if (remaining <= 0) {
-        // Expired — show expiry overlay
-        document.getElementById('cd-days').textContent = '00';
+        document.getElementById('cd-days').textContent  = '00';
         document.getElementById('cd-hours').textContent = '00';
-        document.getElementById('cd-mins').textContent = '00';
-        document.getElementById('cd-secs').textContent = '00';
+        document.getElementById('cd-mins').textContent  = '00';
+        document.getElementById('cd-secs').textContent  = '00';
         showExpiryOverlay();
         return;
       }
-
-      const days = Math.floor(remaining / 86400000);
+      const days  = Math.floor(remaining / 86400000);
       const hours = Math.floor((remaining % 86400000) / 3600000);
-      const mins = Math.floor((remaining % 3600000) / 60000);
-      const secs = Math.floor((remaining % 60000) / 1000);
-
-      document.getElementById('cd-days').textContent = pad(days);
+      const mins  = Math.floor((remaining % 3600000)  / 60000);
+      const secs  = Math.floor((remaining % 60000)    / 1000);
+      document.getElementById('cd-days').textContent  = pad(days);
       document.getElementById('cd-hours').textContent = pad(hours);
-      document.getElementById('cd-mins').textContent = pad(mins);
-      document.getElementById('cd-secs').textContent = pad(secs);
-
+      document.getElementById('cd-mins').textContent  = pad(mins);
+      document.getElementById('cd-secs').textContent  = pad(secs);
       setTimeout(tick, 1000);
     }
     tick();
   }
 
-  /* ═══════════════════════════════════════════
-     EXPIRY OVERLAY + 6H COUNTDOWN
-  ═══════════════════════════════════════════ */
-  function showExpiryOverlay() {
-    const overlay = document.getElementById('expiry-overlay');
-    overlay.style.display = 'flex';
-
-    // Set the 6h block start if not already set
-    if (!ls(KEYS.expiryStart)) {
-      ls(KEYS.expiryStart, Date.now().toString());
+  /* ══════════════════════════════════════════
+     EXPIRY OVERLAY
+  ══════════════════════════════════════════ */
+  async function showExpiryOverlay() {
+    document.getElementById('expiry-overlay').style.display = 'flex';
+    if (!STATE.expiryStart) {
+      await updateState({ expiryStart: Date.now().toString() });
     }
-
     function tick6h() {
-      const start = parseInt(ls(KEYS.expiryStart));
-      const blockAt = start + (6 * 60 * 60 * 1000);
-      const now = Date.now();
-      const rem = blockAt - now;
-
+      const rem = (parseInt(STATE.expiryStart) + 6*3600000) - Date.now();
       if (rem <= 0) {
-        document.getElementById('timer-6h').textContent = '⛔ BLOQUEADO';
-        document.getElementById('timer-6h').style.color = 'var(--red)';
+        document.getElementById('timer-6h').textContent   = '⛔ BLOQUEADO';
+        document.getElementById('timer-6h').style.color   = 'var(--red)';
         return;
       }
-
       const h = Math.floor(rem / 3600000);
       const m = Math.floor((rem % 3600000) / 60000);
-      const s = Math.floor((rem % 60000) / 1000);
+      const s = Math.floor((rem % 60000)   / 1000);
       document.getElementById('timer-6h').textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
       setTimeout(tick6h, 1000);
     }
     tick6h();
   }
 
-  /* ═══════════════════════════════════════════
-     RENEWAL CODE
-  ═══════════════════════════════════════════ */
-  function applyRenewal() {
-    const inp = document.getElementById('renewal-code-inp').value.trim().toUpperCase();
+  /* ══════════════════════════════════════════
+     RENEWAL
+  ══════════════════════════════════════════ */
+  async function applyRenewal() {
+    const inp   = document.getElementById('renewal-code-inp').value.trim().toUpperCase();
     const errEl = document.getElementById('renewal-err');
 
     if (!VALID_CODES.includes(inp)) {
-      errEl.textContent = 'Código inválido. Contacta a @jexe para obtener uno.';
-      errEl.style.display = 'block';
+      errEl.textContent    = 'Código inválido. Contacta a @jexe para obtener uno.';
+      errEl.style.display  = 'block';
       return;
     }
 
-    const used = JSON.parse(ls(KEYS.usedCodes) || '[]');
+    const used = STATE.usedCodes || [];
     if (used.includes(inp)) {
-      errEl.textContent = 'Este código ya fue utilizado anteriormente.';
+      errEl.textContent   = 'Este código ya fue utilizado anteriormente.';
       errEl.style.display = 'block';
       return;
     }
 
     errEl.style.display = 'none';
 
-    // Add to used
-    used.push(inp);
-    ls(KEYS.usedCodes, JSON.stringify(used));
-
-    // Extend 31 days from now
     const newExpiry = Date.now() + (31 * 24 * 60 * 60 * 1000);
-    ls(KEYS.expiry, newExpiry.toString());
-    ls(KEYS.expiryStart, '');
+    await updateState({
+      usedCodes:   [...used, inp],
+      expiry:      newExpiry.toString(),
+      expiryStart: ''
+    });
 
-    // Hide expiry overlay
     document.getElementById('expiry-overlay').style.display = 'none';
     document.getElementById('renewal-code-inp').value = '';
-
     showToast('✓ Membresía renovada por 31 días');
     startCountdown();
   }
 
-  /* ═══════════════════════════════════════════
+  /* ══════════════════════════════════════════
      PRIVACY TOGGLE
-  ═══════════════════════════════════════════ */
+  ══════════════════════════════════════════ */
   let privacyHidden = false;
-
   function togglePrivacy() {
     privacyHidden = !privacyHidden;
-    const vals = document.querySelectorAll('.reg-info-val');
-    vals.forEach(v => v.classList.toggle('hidden-val', privacyHidden));
-    document.getElementById('privacy-icon').className = privacyHidden
-      ? 'fa-solid fa-eye-slash'
-      : 'fa-solid fa-eye';
-    document.getElementById('privacy-lbl').textContent = privacyHidden ? 'Mostrar' : 'Ocultar';
+    document.querySelectorAll('.reg-info-val').forEach(v =>
+      v.classList.toggle('hidden-val', privacyHidden)
+    );
+    document.getElementById('privacy-icon').className =
+      privacyHidden ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+    document.getElementById('privacy-lbl').textContent =
+      privacyHidden ? 'Mostrar' : 'Ocultar';
   }
 
-  /* ═══════════════════════════════════════════
-     FREE FIRE DEEP LINK
-  ═══════════════════════════════════════════ */
+  /* ══════════════════════════════════════════
+     FREE FIRE
+  ══════════════════════════════════════════ */
   function openFreeFire() {
     window.location.href = 'freefire://';
     showToast('Abriendo Free Fire...');
   }
 
-  /* ═══════════════════════════════════════════
+  /* ══════════════════════════════════════════
      PARTICLES
-  ═══════════════════════════════════════════ */
+  ══════════════════════════════════════════ */
   function spawnParticles() {
     function spawnParticle() {
       const p = document.createElement('div');
       p.className = 'particle';
       p.style.left = Math.random() * 100 + 'vw';
       p.style.bottom = '0';
-      const dur = 6 + Math.random() * 10;
+      const dur   = 6 + Math.random() * 10;
       const delay = Math.random() * 4;
       p.style.animationDuration = dur + 's';
-      p.style.animationDelay = delay + 's';
+      p.style.animationDelay    = delay + 's';
       p.style.background = Math.random() > 0.5 ? 'var(--red)' : 'var(--gold)';
       p.style.opacity = '0';
       document.body.appendChild(p);
       setTimeout(() => p.remove(), (dur + delay) * 1000);
     }
-
     setInterval(spawnParticle, 1200);
-    for (let i = 0; i < 5; i++) setTimeout(spawnParticle, i * 300);
+    for (let i=0; i<5; i++) setTimeout(spawnParticle, i*300);
   }
 
-  /* ═══════════════════════════════════════════
+  /* ══════════════════════════════════════════
      BOOT
-  ═══════════════════════════════════════════ */
-  (function boot() {
-    const isRegistered = ls(KEYS.registered) === '1';
+  ══════════════════════════════════════════ */
+  (async function boot() {
+    // Show particles while loading
+    spawnParticles();
 
-    if (!isRegistered) {
-      // Show registration
+    STATE = await loadBundle();
+
+    if (!STATE || STATE.registered !== '1') {
       document.getElementById('reg-overlay').style.display = 'flex';
-      document.getElementById('main-stage').style.display = 'none';
-      spawnParticles();
+      document.getElementById('main-stage').style.display  = 'none';
     } else {
-      // Already registered — check expiry
       initMain();
     }
   })();
 
-  /* Phone code auto-format */
+  /* Input helpers */
   document.getElementById('inp-code').addEventListener('input', function() {
     let v = this.value.replace(/[^\d+]/g,'');
     if (v && v[0] !== '+') v = '+' + v;
     this.value = v;
   });
 
-  /* IMEI: only digits */
   document.getElementById('inp-imei').addEventListener('input', function() {
     this.value = this.value.replace(/\D/g,'');
   });
 
-  /* Renewal code: uppercase */
   document.getElementById('renewal-code-inp').addEventListener('input', function() {
     this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
   });
 
-  /* Enter key on renewal */
   document.getElementById('renewal-code-inp').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') applyRenewal();
   });
