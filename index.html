@@ -4,787 +4,997 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>OnlyRed — Premium</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    color-scheme: light dark;
-    --bg: light-dark(#f0ebe4, #0c0b0a);
-    --text: light-dark(#0c0b0a, #f0ebe4);
-    --text-muted: light-dark(#6b6460, #8a847e);
-    --card-bg: light-dark(rgba(240,235,228,0.96), rgba(18,16,14,0.96));
-    --card-border: light-dark(rgba(12,11,10,0.1), rgba(240,235,228,0.1));
-    --shadow: light-dark(0 24px 80px rgba(0,0,0,0.18), 0 24px 80px rgba(0,0,0,0.7));
-    --red: #c0392b;
-    --red-glow: light-dark(rgba(192,57,43,0.15), rgba(192,57,43,0.28));
-    --red-glow-strong: light-dark(rgba(192,57,43,0.25), rgba(192,57,43,0.45));
-    --red-line: light-dark(rgba(192,57,43,0.45), rgba(192,57,43,0.6));
-    --stroke: light-dark(#0c0b0a, #f0ebe4);
-    --gold: light-dark(#b8923a, #d4a853);
-    --gold-glow: light-dark(rgba(184,146,58,0.15), rgba(212,168,83,0.2));
-    --input-bg: light-dark(rgba(240,235,228,0.7), rgba(28,24,20,0.8));
-    --input-border: light-dark(rgba(12,11,10,0.18), rgba(240,235,228,0.15));
-  }
+:root {
+  --bg:       #05070a;
+  --bg2:      #080c10;
+  --surface:  #0d1117;
+  --surface2: #111820;
+  --border:   rgba(180,20,20,0.22);
+  --border2:  rgba(180,20,20,0.12);
+  --red:      #cc2200;
+  --red2:     #ff3311;
+  --red-glow: rgba(204,34,0,0.18);
+  --red-dim:  rgba(204,34,0,0.08);
+  --amber:    #e8820a;
+  --amber2:   #ffaa33;
+  --amber-glow: rgba(232,130,10,0.15);
+  --text:     #c8d4de;
+  --text2:    #6b7f8e;
+  --text3:    #3d5060;
+  --mono:     'Share Tech Mono', monospace;
+  --display:  'Bebas Neue', sans-serif;
+  --ui:       'Rajdhani', sans-serif;
+  --scan-line: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+}
 
-  html, body {
-    height: 100%;
-    overflow: hidden;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-  }
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ui);
+  overflow: hidden;
+}
 
-  body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100dvh;
-    position: relative;
-    overflow-y: auto;
-  }
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  overflow-y: auto;
+  position: relative;
+}
 
-  .bg-layer {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .bg-orb {
-    position: absolute;
-    top: -30%;
-    left: -20%;
-    width: 100vmax;
-    height: 100vmax;
-    background: radial-gradient(circle, var(--red-glow) 0%, transparent 55%);
-    animation: pulse 9s ease-in-out infinite;
-  }
-  .bg-orb-2 {
-    position: absolute;
-    bottom: -25%;
-    right: -20%;
-    width: 70vmax;
-    height: 70vmax;
-    background: radial-gradient(circle, var(--gold-glow) 0%, transparent 60%);
-    animation: pulse 12s 3s ease-in-out infinite reverse;
-  }
-  .bg-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--card-border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--card-border) 1px, transparent 1px);
-    background-size: 52px 52px;
-    -webkit-mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%);
-    mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black 20%, transparent 100%);
-    opacity: 0.35;
-  }
-  .bg-grain {
-    position: absolute;
-    inset: 0;
-    opacity: 0.025;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-size: 180px;
-  }
-  @keyframes pulse {
-    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
-    50% { transform: scale(1.08) rotate(4deg); opacity: 1; }
-  }
+/* ── BACKGROUND ── */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
 
-  #reg-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    overflow-y: auto;
-    background: var(--bg);
-  }
+/* Radial vignette */
+.bg-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 30%, rgba(0,0,0,0.7) 100%);
+}
 
-  .reg-card {
-    position: relative;
-    width: 100%;
-    max-width: 380px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 20px;
-    padding: 40px 32px 36px;
-    box-shadow: var(--shadow);
-    animation: cardIn 0.7s cubic-bezier(0.22,1,0.36,1) both;
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    margin: auto;
-  }
+/* Red corner glow */
+.bg-corner-r {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60vmax;
+  height: 60vmax;
+  background: radial-gradient(circle, rgba(180,20,0,0.12) 0%, transparent 60%);
+  animation: bgPulse 8s ease-in-out infinite;
+}
+.bg-corner-l {
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 50vmax;
+  height: 50vmax;
+  background: radial-gradient(circle, rgba(232,130,10,0.06) 0%, transparent 60%);
+  animation: bgPulse 11s 2s ease-in-out infinite reverse;
+}
 
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(30px) scale(0.97); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
+@keyframes bgPulse {
+  0%,100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
 
-  .reg-corner { position: absolute; width: 14px; height: 14px; border-color: var(--red-line); border-style: solid; }
-  .reg-corner.tl { top: 12px; left: 12px; border-width: 1.5px 0 0 1.5px; border-radius: 3px 0 0 0; }
-  .reg-corner.tr { top: 12px; right: 12px; border-width: 1.5px 1.5px 0 0; border-radius: 0 3px 0 0; }
-  .reg-corner.bl { bottom: 12px; left: 12px; border-width: 0 0 1.5px 1.5px; border-radius: 0 0 0 3px; }
-  .reg-corner.br { bottom: 12px; right: 12px; border-width: 0 1.5px 1.5px 0; border-radius: 0 0 3px 0; }
+/* Scanlines */
+.bg-scan {
+  position: absolute;
+  inset: 0;
+  background: var(--scan-line);
+  opacity: 0.5;
+  pointer-events: none;
+}
 
-  .reg-header { text-align: center; margin-bottom: 28px; }
+/* Hex grid */
+.bg-hex {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50V17L28 1l28 16v33L28 66zm0-92L0 -26V7L28 23l28-16V-26L28-58z' fill='none' stroke='%23cc2200' stroke-width='0.8'/%3E%3C/svg%3E");
+  background-size: 56px 100px;
+}
 
-  .reg-logo-mark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--red-glow-strong), transparent 70%);
-    border: 1px solid var(--red-line);
-    margin-bottom: 14px;
-    animation: ringPulse 3s ease-in-out infinite;
-  }
+/* Particle */
+.particle {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  8% { opacity: 0.8; }
+  92% { opacity: 0.2; }
+  100% { transform: translateY(-70vh) scale(0); opacity: 0; }
+}
 
-  .reg-title {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-weight: 900;
-    font-size: 1.6rem;
-    letter-spacing: -0.02em;
-    margin-bottom: 5px;
-  }
-  .reg-title .r-red { color: var(--red); }
+/* ── SHARED COMPONENTS ── */
+.mono { font-family: var(--mono); }
 
-  .reg-subtitle {
-    font-size: 0.58rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 300;
-  }
+/* Blinking cursor */
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.cursor::after { content:'_'; animation: blink 1s step-end infinite; color: var(--red2); }
 
-  .reg-divider {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 20px 0;
-    opacity: 0.5;
-  }
-  .reg-divider::before, .reg-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--card-border);
-  }
-  .reg-divider span {
-    font-size: 0.55rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
+/* Corner brackets */
+.brackets { position: absolute; inset: 0; pointer-events: none; }
+.brackets::before, .brackets::after,
+.brackets .b-bl::before, .brackets .b-bl::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--red);
+  border-style: solid;
+  opacity: 0.7;
+}
+.brackets::before { top: 0; left: 0; border-width: 1px 0 0 1px; }
+.brackets::after  { top: 0; right: 0; border-width: 1px 1px 0 0; }
+.brackets .b-bl::before { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+.brackets .b-bl::after  { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
 
-  .input-group { margin-bottom: 14px; position: relative; }
+/* Status dot */
+.status-dot {
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--red2);
+  box-shadow: 0 0 6px var(--red2);
+  animation: blink 2s ease-in-out infinite;
+}
 
-  .input-label {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 400;
-    margin-bottom: 7px;
-  }
-  .input-label i { font-size: 0.7rem; opacity: 0.8; }
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 7px 14px;
+  font-size: 0.62rem;
+  font-family: var(--mono);
+  color: var(--amber2);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.25s, transform 0.25s;
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  .reg-input {
-    width: 100%;
-    background: var(--input-bg);
-    border: 1px solid var(--input-border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 300;
-    color: var(--text);
-    outline: none;
-    transition: border-color 0.25s, box-shadow 0.25s;
-    -webkit-appearance: none;
-    appearance: none;
-  }
-  .reg-input:focus {
-    border-color: var(--red-line);
-    box-shadow: 0 0 0 3px var(--red-glow);
-  }
-  .reg-input::placeholder {
-    color: var(--text-muted);
-    opacity: 0.6;
-    font-size: 0.78rem;
-  }
+/* ═══════════════════════════════════
+   REGISTRATION OVERLAY
+═══════════════════════════════════ */
+#reg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+  background: var(--bg);
+}
 
-  .phone-wrap { display: flex; gap: 8px; }
-  .phone-code-input { width: 90px; flex-shrink: 0; }
-  .phone-num-input { flex: 1; }
+.reg-card {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 24px 22px 20px;
+  animation: cardIn 0.5s cubic-bezier(0.22,1,0.36,1) both;
+  margin: auto;
+  box-shadow: 0 0 60px rgba(180,20,0,0.12), inset 0 0 40px rgba(0,0,0,0.3);
+}
 
-  .reg-error {
-    font-size: 0.62rem;
-    color: #e74c3c;
-    margin-top: 5px;
-    display: none;
-    letter-spacing: 0.05em;
-  }
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-  .reg-btn {
-    width: 100%;
-    margin-top: 22px;
-    padding: 14px;
-    background: linear-gradient(135deg, #c0392b, #a93226);
-    border: none;
-    border-radius: 12px;
-    color: #f0ebe4;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 8px 32px rgba(192,57,43,0.35);
-  }
-  .reg-btn::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
-    pointer-events: none;
-  }
-  .reg-btn:active { transform: scale(0.98); }
+/* Top bar */
+.reg-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border2);
+}
 
-  .reg-note {
-    text-align: center;
-    margin-top: 14px;
-    font-size: 0.58rem;
-    color: var(--text-muted);
-    letter-spacing: 0.08em;
-    line-height: 1.7;
-  }
+.reg-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-  #expiry-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: rgba(12,11,10,0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
+.reg-brand-icon {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--red);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--red-dim);
+  animation: borderPulse 3s ease-in-out infinite;
+}
 
-  .expiry-card {
-    width: 100%;
-    max-width: 360px;
-    background: var(--card-bg);
-    border: 1px solid rgba(192,57,43,0.4);
-    border-radius: 20px;
-    padding: 38px 30px 32px;
-    text-align: center;
-    box-shadow: 0 0 80px rgba(192,57,43,0.2);
-    animation: cardIn 0.5s ease both;
-  }
+@keyframes borderPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(204,34,0,0); }
+  50% { box-shadow: 0 0 12px 2px rgba(204,34,0,0.25); }
+}
 
-  .expiry-icon {
-    font-size: 2.4rem;
-    color: var(--red);
-    margin-bottom: 16px;
-    display: block;
-    animation: expPulse 2s ease-in-out infinite;
-  }
+.reg-brand-name {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+}
+.reg-brand-name .r { color: var(--red2); }
 
-  @keyframes expPulse {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(192,57,43,0.4)); }
-    50% { transform: scale(1.08); filter: drop-shadow(0 0 20px rgba(192,57,43,0.7)); }
-  }
+.reg-sys-id {
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  color: var(--text3);
+  letter-spacing: 0.12em;
+  text-align: right;
+  line-height: 1.6;
+}
 
-  .expiry-title {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--red);
-  }
+/* Section label */
+.reg-section-label {
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  color: var(--red);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.reg-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
 
-  .expiry-msg {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: 24px;
-    letter-spacing: 0.03em;
-  }
+/* Input groups — ultra compact */
+.input-group { margin-bottom: 8px; }
 
-  .countdown-6h {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--gold);
-    letter-spacing: 0.05em;
-    margin-bottom: 24px;
-  }
+.input-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  color: var(--amber);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.input-label i { font-size: 0.55rem; opacity: 0.9; }
 
-  .renewal-input-wrap { display: flex; gap: 8px; margin-bottom: 14px; }
+.reg-input {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 2px;
+  padding: 8px 10px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+  letter-spacing: 0.04em;
+}
+.reg-input:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px var(--red-dim), inset 0 0 20px rgba(0,0,0,0.3);
+}
+.reg-input::placeholder { color: var(--text3); font-size: 0.7rem; }
 
-  .renewal-input {
-    flex: 1;
-    background: var(--input-bg);
-    border: 1px solid var(--input-border);
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    color: var(--text);
-    outline: none;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    transition: border-color 0.25s, box-shadow 0.25s;
-  }
-  .renewal-input:focus {
-    border-color: var(--red-line);
-    box-shadow: 0 0 0 3px var(--red-glow);
-  }
+.phone-wrap { display: flex; gap: 6px; }
+.phone-code-input { width: 72px; flex-shrink: 0; }
+.phone-num-input  { flex: 1; }
 
-  .renewal-btn {
-    padding: 12px 16px;
-    background: linear-gradient(135deg, #c0392b, #a93226);
-    border: none;
-    border-radius: 10px;
-    color: #f0ebe4;
-    font-size: 0.75rem;
-    cursor: pointer;
-    letter-spacing: 0.1em;
-    white-space: nowrap;
-    font-family: 'DM Sans', sans-serif;
-    transition: transform 0.2s;
-  }
-  .renewal-btn:active { transform: scale(0.97); }
+.reg-error {
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  color: var(--red2);
+  margin-top: 3px;
+  display: none;
+  letter-spacing: 0.05em;
+}
 
-  .renewal-error {
-    font-size: 0.62rem;
-    color: #e74c3c;
-    margin-bottom: 12px;
-    display: none;
-    letter-spacing: 0.05em;
-  }
+/* Submit */
+.reg-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 10px;
+  background: linear-gradient(135deg, #a81800, #cc2200);
+  border: 1px solid var(--red2);
+  border-radius: 2px;
+  color: #fff;
+  font-family: var(--ui);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 24px rgba(180,20,0,0.3);
+}
+.reg-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  transition: left 0.4s;
+}
+.reg-btn:active { transform: scale(0.98); }
+.reg-btn:hover::before { left: 100%; }
 
-  .contact-jexe {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px 20px;
-    border: 1px solid var(--gold);
-    border-radius: 10px;
-    color: var(--gold);
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.2s;
-    margin-top: 8px;
-  }
-  .contact-jexe:active { background: var(--gold-glow); }
+.reg-note {
+  text-align: center;
+  margin-top: 9px;
+  font-family: var(--mono);
+  font-size: 0.48rem;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.7;
+}
 
-  .stage {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-  }
+/* ═══════════════════════════════════
+   EXPIRY OVERLAY
+═══════════════════════════════════ */
+#expiry-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(5,7,10,0.97);
+  backdrop-filter: blur(12px);
+}
 
-  .vert-line {
-    width: 1px;
-    height: 56px;
-    background: linear-gradient(to bottom, transparent, var(--red-line));
-    margin-bottom: 24px;
-    transform-origin: top;
-    animation: growLine 1s 0.1s cubic-bezier(0.22,1,0.36,1) both;
-  }
+.expiry-card {
+  width: 100%;
+  max-width: 340px;
+  background: var(--surface);
+  border: 1px solid rgba(204,34,0,0.5);
+  border-radius: 2px;
+  padding: 24px 22px 20px;
+  text-align: center;
+  box-shadow: 0 0 80px rgba(180,20,0,0.2), inset 0 0 40px rgba(0,0,0,0.4);
+  animation: cardIn 0.4s ease both;
+  position: relative;
+}
 
-  @keyframes growLine {
-    from { transform: scaleY(0); opacity: 0; }
-    to { transform: scaleY(1); opacity: 1; }
-  }
+.expiry-icon {
+  font-size: 1.8rem;
+  color: var(--red2);
+  margin-bottom: 10px;
+  display: block;
+  animation: expPulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 12px var(--red));
+}
+@keyframes expPulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
 
-  .eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.58rem;
-    font-weight: 300;
-    letter-spacing: 0.38em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
-    animation: fadeUp 0.8s 0.5s ease both;
-  }
-  .eyebrow-gem { width: 16px; height: 16px; flex-shrink: 0; }
+.expiry-title {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  letter-spacing: 0.1em;
+  color: var(--red2);
+  margin-bottom: 6px;
+  filter: drop-shadow(0 0 20px rgba(204,34,0,0.5));
+}
 
-  .title-wrap {
-    position: relative;
-    text-align: center;
-    animation: fadeUp 0.9s 0.7s cubic-bezier(0.22,1,0.36,1) both;
-  }
+.expiry-msg {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--text2);
+  line-height: 1.9;
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
 
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-style: italic;
-    line-height: 0.88;
-    letter-spacing: -0.02em;
-    font-size: clamp(5rem, 22vw, 10rem);
-    position: relative;
-  }
+.countdown-6h {
+  font-family: var(--mono);
+  font-size: 2.2rem;
+  color: var(--amber2);
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 0 16px rgba(232,130,10,0.5));
+}
 
-  h1 .only {
-    display: block;
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--stroke);
-  }
+.renewal-input-wrap { display: flex; gap: 6px; margin-bottom: 8px; }
 
-  h1 .red-word {
-    display: block;
-    color: var(--red);
-    margin-top: -0.05em;
-    position: relative;
-    filter: drop-shadow(0 0 40px rgba(192,57,43,0.35));
-  }
+.renewal-input {
+  flex: 1;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 2px;
+  padding: 9px 10px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text);
+  outline: none;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.renewal-input:focus { border-color: var(--red); box-shadow: 0 0 0 2px var(--red-dim); }
 
-  h1 .red-word::after {
-    content: 'Red';
-    position: absolute;
-    inset: 0;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--red);
-    transform: translate(3px, 3px);
-    opacity: 0.2;
-    pointer-events: none;
-  }
+.renewal-btn {
+  padding: 9px 14px;
+  background: linear-gradient(135deg, #a81800, #cc2200);
+  border: 1px solid var(--red2);
+  border-radius: 2px;
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.renewal-btn:active { transform: scale(0.96); }
 
-  .premium-badge {
-    position: absolute;
-    top: 6px;
-    right: -3.4rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.5rem;
-    font-weight: 400;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid var(--gold);
-    border-radius: 4px;
-    padding: 2px 6px;
-    line-height: 1.7;
-    white-space: nowrap;
-    opacity: 0.85;
-  }
+.renewal-error {
+  font-family: var(--mono);
+  font-size: 0.54rem;
+  color: var(--red2);
+  margin-bottom: 10px;
+  display: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
 
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin: 32px 0 0;
-    width: 220px;
-    animation: fadeUp 0.8s 1s ease both;
-  }
-  .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--card-border)); }
-  .divider-line.right { background: linear-gradient(to left, transparent, var(--card-border)); }
-  .divider-ornament { display: flex; align-items: center; gap: 5px; }
-  .d-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); }
-  .d-diamond { width: 6px; height: 6px; background: var(--red); transform: rotate(45deg); box-shadow: 0 0 12px var(--red); }
+.contact-jexe {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border: 1px solid rgba(232,130,10,0.4);
+  border-radius: 2px;
+  color: var(--amber2);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+  margin-top: 8px;
+}
+.contact-jexe:active { background: var(--amber-glow); border-color: var(--amber2); }
 
-  .countdown-wrap {
-    animation: fadeUp 0.8s 1.05s ease both;
-    margin: 28px 0 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-  .countdown-label {
-    font-size: 0.52rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-weight: 300;
-  }
-  .countdown-units { display: flex; align-items: center; gap: 6px; }
-  .cd-unit { display: flex; flex-direction: column; align-items: center; gap: 3px; }
-  .cd-num {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: 1.8rem;
-    line-height: 1;
-    color: var(--red);
-    filter: drop-shadow(0 0 12px rgba(192,57,43,0.4));
-    min-width: 44px;
-    text-align: center;
-    background: var(--red-glow);
-    border: 1px solid var(--red-line);
-    border-radius: 8px;
-    padding: 6px 4px;
-  }
-  .cd-lbl {
-    font-size: 0.42rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-weight: 300;
-  }
-  .cd-sep {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    color: var(--gold);
-    opacity: 0.5;
-    margin-bottom: 14px;
-    animation: blinkSep 1s ease-in-out infinite;
-  }
-  @keyframes blinkSep {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 0.15; }
-  }
+/* ═══════════════════════════════════
+   MAIN STAGE
+═══════════════════════════════════ */
+.stage {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 360px;
+  padding: 12px 16px 16px;
+  gap: 0;
+}
 
-  .access-panel {
-    animation: fadeUp 0.9s 1.15s cubic-bezier(0.22,1,0.36,1) both;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    padding: 0 12px;
-    width: 100%;
-    max-width: 340px;
-  }
+/* ── TOP HUD BAR ── */
+.hud-topbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  animation: fadeIn 0.5s 0.2s ease both;
+}
+.hud-sys {
+  font-family: var(--mono);
+  font-size: 0.48rem;
+  color: var(--text3);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+.hud-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 0.48rem;
+  color: var(--red2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 
-  .corner-marks { position: absolute; inset: -16px; pointer-events: none; }
-  .corner { position: absolute; width: 12px; height: 12px; border-color: var(--red-line); border-style: solid; opacity: 0.6; }
-  .corner.tl { top: 0; left: 0; border-width: 1px 0 0 1px; }
-  .corner.tr { top: 0; right: 0; border-width: 1px 1px 0 0; }
-  .corner.bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
-  .corner.br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+/* ── TITLE BLOCK ── */
+.title-block {
+  width: 100%;
+  position: relative;
+  margin-bottom: 8px;
+  animation: fadeIn 0.5s 0.3s ease both;
+  text-align: center;
+}
 
-  .reg-info-panel {
-    width: 100%;
-    background: var(--input-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 14px;
-    padding: 16px 18px;
-    position: relative;
-    overflow: hidden;
-  }
-  .reg-info-panel::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--red), var(--gold));
-  }
-  .reg-info-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-  }
-  .reg-info-title {
-    font-size: 0.55rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 300;
-  }
-  .privacy-toggle {
-    background: none;
-    border: 1px solid var(--card-border);
-    border-radius: 6px;
-    padding: 4px 8px;
-    cursor: pointer;
-    color: var(--text-muted);
-    font-size: 0.62rem;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: border-color 0.2s, color 0.2s;
-    font-family: 'DM Sans', sans-serif;
-    letter-spacing: 0.08em;
-  }
-  .privacy-toggle:active { border-color: var(--red-line); color: var(--red); }
-  .reg-info-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 7px 0;
-    border-bottom: 1px solid var(--card-border);
-  }
-  .reg-info-row:last-child { border-bottom: none; }
-  .reg-info-icon { width: 20px; text-align: center; font-size: 0.7rem; color: var(--red); opacity: 0.8; margin-top: 1px; flex-shrink: 0; }
-  .reg-info-content { flex: 1; }
-  .reg-info-key { font-size: 0.52rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); font-weight: 300; margin-bottom: 2px; }
-  .reg-info-val { font-size: 0.78rem; font-weight: 300; color: var(--text); font-family: 'DM Mono', 'DM Sans', monospace; letter-spacing: 0.04em; transition: filter 0.3s; }
-  .reg-info-val.hidden-val { filter: blur(6px); user-select: none; }
+.title-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  color: var(--amber);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+  opacity: 0.8;
+}
 
-  .membership-line {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.65rem;
-    font-weight: 300;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.9;
-  }
-  .membership-line::before, .membership-line::after {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 1px;
-    background: var(--gold);
-    opacity: 0.4;
-  }
+.title-main {
+  font-family: var(--display);
+  font-size: clamp(3.8rem, 18vw, 6.5rem);
+  letter-spacing: 0.06em;
+  line-height: 0.9;
+  position: relative;
+  display: inline-block;
+}
 
-  .crown-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 64px;
-    height: 64px;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .crown-wrap:active { transform: scale(0.95); }
-  .crown-ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--red-line); animation: ringPulse 3s ease-in-out infinite; }
-  .crown-ring-2 { position: absolute; inset: -8px; border-radius: 50%; border: 1px solid var(--gold); opacity: 0.25; animation: ringPulse 3s 1.5s ease-in-out infinite; }
-  @keyframes ringPulse {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.08); opacity: 1; }
-  }
-  .crown-inner { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%); border-radius: 50%; }
+.title-only {
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(200,212,222,0.35);
+  letter-spacing: 0.12em;
+}
 
-  .bottom-pin { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 1px; height: 44px; background: linear-gradient(to bottom, var(--red-line), transparent); z-index: 1; }
-  .side-accent { position: fixed; top: 50%; transform: translateY(-50%); width: 1px; height: 120px; z-index: 1; animation: fadeIn 1.5s 1.5s ease both; }
-  .side-accent.left { left: 24px; background: linear-gradient(to bottom, transparent, var(--red-line), transparent); }
-  .side-accent.right { right: 24px; background: linear-gradient(to bottom, transparent, var(--gold), transparent); opacity: 0.3; }
+.title-red {
+  display: block;
+  color: var(--red2);
+  filter: drop-shadow(0 0 30px rgba(204,34,0,0.5));
+  letter-spacing: 0.12em;
+  position: relative;
+}
+.title-red::after {
+  content: 'RED';
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--red);
+  transform: translate(2px,2px);
+  opacity: 0.3;
+}
 
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+.title-badge {
+  position: absolute;
+  top: 4px;
+  right: 0;
+  font-family: var(--mono);
+  font-size: 0.44rem;
+  color: var(--amber);
+  border: 1px solid rgba(232,130,10,0.5);
+  border-radius: 1px;
+  padding: 2px 5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: rgba(232,130,10,0.06);
+}
 
-  .particle { position: fixed; width: 2px; height: 2px; border-radius: 50%; background: var(--red); opacity: 0; pointer-events: none; z-index: 0; animation: floatUp linear infinite; }
-  @keyframes floatUp {
-    0% { transform: translateY(0) scale(1); opacity: 0; }
-    10% { opacity: 0.6; }
-    90% { opacity: 0.2; }
-    100% { transform: translateY(-60vh) scale(0); opacity: 0; }
-  }
+/* ── THIN SEPARATOR ── */
+.sep {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+  animation: fadeIn 0.5s 0.35s ease both;
+}
+.sep-line { flex: 1; height: 1px; background: var(--border); }
+.sep-node {
+  width: 4px; height: 4px;
+  background: var(--red);
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px var(--red);
+}
 
-  .toast {
-    position: fixed;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 10px;
-    padding: 10px 18px;
-    font-size: 0.7rem;
-    color: var(--text);
-    z-index: 300;
-    opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
-    white-space: nowrap;
-    pointer-events: none;
-    letter-spacing: 0.05em;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+/* ── COUNTDOWN ── */
+.cd-block {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  animation: fadeIn 0.5s 0.4s ease both;
+  position: relative;
+  overflow: hidden;
+}
+.cd-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  opacity: 0.6;
+}
+
+.cd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.cd-label {
+  font-family: var(--mono);
+  font-size: 0.48rem;
+  color: var(--red);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.cd-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: 0.44rem;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.cd-units {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  align-items: center;
+  gap: 2px;
+}
+
+.cd-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.cd-num {
+  font-family: var(--mono);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--red2);
+  filter: drop-shadow(0 0 8px rgba(204,34,0,0.5));
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 1px;
+  padding: 4px 6px;
+  min-width: 42px;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.cd-lbl {
+  font-family: var(--mono);
+  font-size: 0.38rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+
+.cd-sep {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  color: var(--amber);
+  opacity: 0.4;
+  padding-bottom: 10px;
+  animation: blink 1.2s step-end infinite;
+}
+
+/* ── INFO PANEL ── */
+.info-panel {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  animation: fadeIn 0.5s 0.45s ease both;
+  position: relative;
+  overflow: hidden;
+}
+.info-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--red), var(--amber));
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.info-header-title {
+  font-family: var(--mono);
+  font-size: 0.48rem;
+  color: var(--amber);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.privacy-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 3px 7px;
+  cursor: pointer;
+  color: var(--text3);
+  font-family: var(--mono);
+  font-size: 0.48rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: border-color 0.2s, color 0.2s;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.privacy-toggle:active { border-color: var(--red); color: var(--red2); }
+
+/* Info rows — ultra compact grid */
+.info-rows {
+  display: grid;
+  gap: 0;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 14px 60px 1fr;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.info-row:last-child { border-bottom: none; }
+
+.info-icon {
+  font-size: 0.6rem;
+  color: var(--red);
+  text-align: center;
+  opacity: 0.8;
+}
+
+.info-key {
+  font-family: var(--mono);
+  font-size: 0.46rem;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.info-val {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  transition: filter 0.3s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.info-val.hidden-val { filter: blur(5px); user-select: none; }
+
+/* ── BOTTOM ROW: crown + membership ── */
+.bottom-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: fadeIn 0.5s 0.5s ease both;
+}
+
+.membership-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  color: var(--amber);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid rgba(232,130,10,0.3);
+  border-radius: 1px;
+  padding: 4px 10px;
+  background: rgba(232,130,10,0.05);
+}
+
+.crown-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+.crown-wrap:active { transform: scale(0.93); }
+
+.crown-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(204,34,0,0.5);
+  animation: ringPulse 3s ease-in-out infinite;
+}
+.crown-ring-2 {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(232,130,10,0.2);
+  animation: ringPulse 3s 1.5s ease-in-out infinite;
+}
+@keyframes ringPulse {
+  0%,100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+.crown-bg {
+  width: 30px; height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(204,34,0,0.15), transparent 70%);
+  border-radius: 50%;
+}
+
+.hud-bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  animation: fadeIn 0.5s 0.55s ease both;
+}
+.hud-bottom-txt {
+  font-family: var(--mono);
+  font-size: 0.44rem;
+  color: var(--text3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ── SIDE ACCENTS ── */
+.side-l, .side-r {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 100px;
+  z-index: 1;
+  animation: fadeIn 1.5s 1s ease both;
+}
+.side-l { left: 12px; background: linear-gradient(to bottom, transparent, rgba(204,34,0,0.5), transparent); }
+.side-r { right: 12px; background: linear-gradient(to bottom, transparent, rgba(232,130,10,0.3), transparent); }
+
+.bottom-pin {
+  position: fixed;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 1px; height: 32px;
+  background: linear-gradient(to bottom, rgba(204,34,0,0.4), transparent);
+  z-index: 1;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 </style>
 </head>
 <body>
 
 <div class="bg-layer">
-  <div class="bg-orb"></div>
-  <div class="bg-orb-2"></div>
-  <div class="bg-grid"></div>
-  <div class="bg-grain"></div>
+  <div class="bg-corner-r"></div>
+  <div class="bg-corner-l"></div>
+  <div class="bg-hex"></div>
+  <div class="bg-scan"></div>
+  <div class="bg-vignette"></div>
 </div>
 
-<div class="side-accent left"></div>
-<div class="side-accent right"></div>
+<div class="side-l"></div>
+<div class="side-r"></div>
 
 <!-- ══ REGISTRATION OVERLAY ══ -->
 <div id="reg-overlay">
   <div class="reg-card">
-    <div class="reg-corner tl"></div>
-    <div class="reg-corner tr"></div>
-    <div class="reg-corner bl"></div>
-    <div class="reg-corner br"></div>
+    <div class="brackets"><div class="b-bl"></div></div>
 
-    <div class="reg-header">
-      <div class="reg-logo-mark">
-        <svg width="22" height="18" viewBox="0 0 22 18" fill="none">
-          <path d="M1 17L3 7L7.5 12L11 2L14.5 12L19 7L21 17H1Z" fill="none" stroke="var(--gold)" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
-          <circle cx="11" cy="2" r="1" fill="var(--red)"/>
-        </svg>
+    <div class="reg-topbar">
+      <div class="reg-brand">
+        <div class="reg-brand-icon">
+          <svg width="14" height="12" viewBox="0 0 22 18" fill="none">
+            <path d="M1 17L3 7L7.5 12L11 2L14.5 12L19 7L21 17H1Z" fill="none" stroke="#e8820a" stroke-width="1.4" stroke-linejoin="round"/>
+            <circle cx="11" cy="2" r="1.2" fill="#cc2200"/>
+          </svg>
+        </div>
+        <div class="reg-brand-name"><span class="r">ONLY</span>RED</div>
       </div>
-      <div class="reg-title"><span class="r-red">Only</span>Red</div>
-      <div class="reg-subtitle">PREMIUM</div>
+      <div class="reg-sys-id">
+        SYS/PREMIUM<br>
+        REG-MODULE v2
+      </div>
     </div>
 
-    <div class="reg-divider"><span>Información del dispositivo</span></div>
+    <div class="reg-section-label">Identificación del dispositivo</div>
 
     <div class="input-group">
       <div class="input-label"><i class="fa-brands fa-apple"></i>Modelo exacto del iPhone</div>
       <input type="text" class="reg-input" id="inp-model" placeholder="Ej: iPhone 15 Pro Max" autocomplete="off">
-      <div class="reg-error" id="err-model">Este campo es obligatorio</div>
+      <div class="reg-error" id="err-model">// campo obligatorio</div>
     </div>
 
     <div class="input-group">
-      <div class="input-label"><i class="fa-solid fa-gear"></i>Versión de iOS exacta</div>
+      <div class="input-label"><i class="fa-solid fa-microchip"></i>Versión de iOS exacta</div>
       <input type="text" class="reg-input" id="inp-ios" placeholder="Ej: iOS 17.4.1" autocomplete="off">
-      <div class="reg-error" id="err-ios">Este campo es obligatorio</div>
+      <div class="reg-error" id="err-ios">// campo obligatorio</div>
     </div>
 
     <div class="input-group">
-      <div class="input-label"><i class="fa-solid fa-fingerprint"></i>IMEI Principal</div>
-      <input type="text" class="reg-input" id="inp-imei" placeholder="15 dígitos" maxlength="17" inputmode="numeric" autocomplete="off">
-      <div class="reg-error" id="err-imei">Ingresa un IMEI válido (13–17 dígitos)</div>
+      <div class="input-label"><i class="fa-solid fa-hashtag"></i>IMEI Principal</div>
+      <input type="text" class="reg-input mono" id="inp-imei" placeholder="15 dígitos" maxlength="17" inputmode="numeric" autocomplete="off">
+      <div class="reg-error" id="err-imei">// IMEI inválido (13–17 dígitos)</div>
     </div>
 
     <div class="input-group">
-      <div class="input-label"><i class="fa-solid fa-phone"></i>Número de teléfono</div>
+      <div class="input-label"><i class="fa-solid fa-tower-broadcast"></i>Número de teléfono</div>
       <div class="phone-wrap">
-        <input type="text" class="reg-input phone-code-input" id="inp-code" placeholder="+57" maxlength="5" inputmode="tel">
-        <input type="text" class="reg-input phone-num-input" id="inp-phone" placeholder="Número de teléfono" inputmode="tel" autocomplete="off">
+        <input type="text" class="reg-input mono phone-code-input" id="inp-code" placeholder="+57" maxlength="5" inputmode="tel">
+        <input type="text" class="reg-input mono phone-num-input" id="inp-phone" placeholder="Número" inputmode="tel" autocomplete="off">
       </div>
-      <div class="reg-error" id="err-phone">Ingresa un número de teléfono válido</div>
+      <div class="reg-error" id="err-phone">// número inválido</div>
     </div>
 
     <button class="reg-btn" onclick="submitRegistration()">
-      <i class="fa-solid fa-shield-halved" style="margin-right:8px;"></i>
-      Activar Registro
+      <i class="fa-solid fa-shield-halved" style="margin-right:7px;"></i>
+      ACTIVAR REGISTRO
     </button>
 
     <div class="reg-note">
-      Tu información es confidencial.<br>
-      No se comparte con terceros.
+      // DATOS CIFRADOS · USO EXCLUSIVO · NO SE COMPARTE //
     </div>
   </div>
 </div>
@@ -792,14 +1002,15 @@
 <!-- ══ EXPIRY OVERLAY ══ -->
 <div id="expiry-overlay">
   <div class="expiry-card">
-    <i class="fa-solid fa-clock-rotate-left expiry-icon"></i>
-    <div class="expiry-title">Acceso Expirado</div>
+    <div class="brackets"><div class="b-bl"></div></div>
+    <i class="fa-solid fa-triangle-exclamation expiry-icon"></i>
+    <div class="expiry-title">ACCESO EXPIRADO</div>
     <div class="expiry-msg">
-      Tu membresía de 31 días ha concluido.<br>
-      El acceso se bloqueará definitivamente en:<br><br>
-      <strong style="color:var(--red);">Si no introduces un código de renovación.</strong>
+      MEMBRESÍA DE 31 DÍAS CONCLUIDA<br>
+      BLOQUEO DEFINITIVO EN:<br>
+      <span style="color:var(--red2);">// SIN CÓDIGO DE RENOVACIÓN</span>
     </div>
-    <div class="countdown-6h" id="timer-6h">06:00:00</div>
+    <div class="countdown-6h mono" id="timer-6h">06:00:00</div>
 
     <div class="renewal-input-wrap">
       <input type="text" class="renewal-input" id="renewal-code-inp" placeholder="CÓDIGO DE RENOVACIÓN" maxlength="14" autocomplete="off">
@@ -807,11 +1018,11 @@
         <i class="fa-solid fa-key"></i>
       </button>
     </div>
-    <div class="renewal-error" id="renewal-err">Código inválido o ya utilizado.</div>
+    <div class="renewal-error" id="renewal-err">// CÓDIGO INVÁLIDO O YA UTILIZADO</div>
 
     <a href="https://wa.me/12147255380?text=Hola%20%40jexe%2C%20necesito%20un%20c%C3%B3digo%20de%20renovaci%C3%B3n%20para%20OnlyRed%20Premium." class="contact-jexe" target="_blank">
-      <i class="fa-brands fa-whatsapp" style="font-size:1rem;"></i>
-      Contactar a @jexe para renovar
+      <i class="fa-brands fa-whatsapp" style="font-size:0.9rem;"></i>
+      CONTACTAR @JEXE · RENOVAR 31 DÍAS
     </a>
   </div>
 </div>
@@ -821,42 +1032,43 @@
 
 <!-- ══ MAIN STAGE ══ -->
 <div class="stage" id="main-stage" style="display:none;">
-  <div class="vert-line"></div>
 
-  <div class="eyebrow">
-    <svg class="eyebrow-gem" viewBox="0 0 16 16" fill="none">
-      <path d="M8 1L14 5.5L11.5 14H4.5L2 5.5L8 1Z" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linejoin="round"/>
-      <path d="M2 5.5H14M8 1L5.5 5.5M8 1L10.5 5.5M4.5 14L5.5 5.5M11.5 14L10.5 5.5" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
-    </svg>
-    Versión Premium
-    <svg class="eyebrow-gem" viewBox="0 0 16 16" fill="none">
-      <path d="M8 1L14 5.5L11.5 14H4.5L2 5.5L8 1Z" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linejoin="round"/>
-      <path d="M2 5.5H14M8 1L5.5 5.5M8 1L10.5 5.5M4.5 14L5.5 5.5M11.5 14L10.5 5.5" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
-    </svg>
-  </div>
-
-  <div class="title-wrap">
-    <h1>
-      <span class="only">Only</span>
-      <span class="red-word">Red</span>
-    </h1>
-    <span class="premium-badge">Premium</span>
-  </div>
-
-  <div class="divider">
-    <div class="divider-line"></div>
-    <div class="divider-ornament">
-      <div class="d-dot"></div>
-      <div class="d-diamond"></div>
-      <div class="d-dot"></div>
+  <!-- HUD TOP -->
+  <div class="hud-topbar">
+    <div class="hud-sys">
+      ONLYRED/SYS<br>
+      <span class="mono" style="color:var(--red);font-size:0.44rem;" id="sys-date">--/--/----</span>
     </div>
-    <div class="divider-line right"></div>
+    <div class="hud-status">
+      <div class="status-dot"></div>
+      ACTIVO
+    </div>
   </div>
 
-  <!-- COUNTDOWN 31 DAYS -->
-  <div class="countdown-wrap">
-    <div class="countdown-label">Tiempo restante de membresía</div>
-    <div class="countdown-units">
+  <!-- TITLE -->
+  <div class="title-block">
+    <div class="title-eyebrow cursor">VERSIÓN PREMIUM</div>
+    <div class="title-main">
+      <span class="title-only">ONLY</span>
+      <span class="title-red">RED</span>
+    </div>
+    <span class="title-badge">PREMIUM</span>
+  </div>
+
+  <!-- SEPARATOR -->
+  <div class="sep">
+    <div class="sep-line"></div>
+    <div class="sep-node"></div>
+    <div class="sep-line"></div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="cd-block">
+    <div class="cd-header">
+      <div class="cd-label">// TIEMPO RESTANTE</div>
+      <div class="cd-indicator"><div class="status-dot" style="width:4px;height:4px;"></div>MEMBRESÍA</div>
+    </div>
+    <div class="cd-units">
       <div class="cd-unit">
         <div class="cd-num" id="cd-days">31</div>
         <div class="cd-lbl">días</div>
@@ -864,7 +1076,7 @@
       <div class="cd-sep">:</div>
       <div class="cd-unit">
         <div class="cd-num" id="cd-hours">00</div>
-        <div class="cd-lbl">horas</div>
+        <div class="cd-lbl">hrs</div>
       </div>
       <div class="cd-sep">:</div>
       <div class="cd-unit">
@@ -879,550 +1091,317 @@
     </div>
   </div>
 
-  <!-- ACCESS PANEL -->
-  <div class="access-panel">
-    <div class="corner-marks">
-      <div class="corner tl"></div>
-      <div class="corner tr"></div>
-      <div class="corner bl"></div>
-      <div class="corner br"></div>
+  <!-- INFO PANEL -->
+  <div class="info-panel">
+    <div class="info-header">
+      <div class="info-header-title">
+        <i class="fa-solid fa-id-badge"></i>
+        DATOS DEL MIEMBRO
+      </div>
+      <button class="privacy-toggle" id="privacy-btn" onclick="togglePrivacy()">
+        <i class="fa-solid fa-eye" id="privacy-icon"></i>
+        <span id="privacy-lbl">OCULTAR</span>
+      </button>
     </div>
 
-    <div class="reg-info-panel">
-      <div class="reg-info-header">
-        <div class="reg-info-title"><i class="fa-solid fa-id-card" style="margin-right:6px;opacity:0.7;"></i>Datos del Miembro</div>
-        <button class="privacy-toggle" id="privacy-btn" onclick="togglePrivacy()">
-          <i class="fa-solid fa-eye" id="privacy-icon"></i>
-          <span id="privacy-lbl">Ocultar</span>
-        </button>
+    <div class="info-rows">
+      <div class="info-row">
+        <div class="info-icon"><i class="fa-brands fa-apple"></i></div>
+        <div class="info-key">MODELO</div>
+        <div class="info-val" id="disp-model">—</div>
       </div>
+      <div class="info-row">
+        <div class="info-icon"><i class="fa-solid fa-microchip"></i></div>
+        <div class="info-key">iOS</div>
+        <div class="info-val" id="disp-ios">—</div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon"><i class="fa-solid fa-hashtag"></i></div>
+        <div class="info-key">IMEI</div>
+        <div class="info-val" id="disp-imei">—</div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+        <div class="info-key">TELÉFONO</div>
+        <div class="info-val" id="disp-phone">—</div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon"><i class="fa-solid fa-calendar-check"></i></div>
+        <div class="info-key">REGISTRO</div>
+        <div class="info-val" id="disp-date">—</div>
+      </div>
+    </div>
+  </div>
 
-      <div class="reg-info-row">
-        <div class="reg-info-icon"><i class="fa-brands fa-apple"></i></div>
-        <div class="reg-info-content">
-          <div class="reg-info-key">Modelo iPhone</div>
-          <div class="reg-info-val" id="disp-model">—</div>
-        </div>
-      </div>
-      <div class="reg-info-row">
-        <div class="reg-info-icon"><i class="fa-solid fa-gear"></i></div>
-        <div class="reg-info-content">
-          <div class="reg-info-key">Versión iOS</div>
-          <div class="reg-info-val" id="disp-ios">—</div>
-        </div>
-      </div>
-      <div class="reg-info-row">
-        <div class="reg-info-icon"><i class="fa-solid fa-fingerprint"></i></div>
-        <div class="reg-info-content">
-          <div class="reg-info-key">IMEI Principal</div>
-          <div class="reg-info-val" id="disp-imei">—</div>
-        </div>
-      </div>
-      <div class="reg-info-row">
-        <div class="reg-info-icon"><i class="fa-solid fa-phone"></i></div>
-        <div class="reg-info-content">
-          <div class="reg-info-key">Número de Teléfono</div>
-          <div class="reg-info-val" id="disp-phone">—</div>
-        </div>
-      </div>
-      <div class="reg-info-row">
-        <div class="reg-info-icon"><i class="fa-solid fa-calendar-check"></i></div>
-        <div class="reg-info-content">
-          <div class="reg-info-key">Fecha de Registro</div>
-          <div class="reg-info-val" id="disp-date">—</div>
-        </div>
-      </div>
+  <!-- BOTTOM ROW -->
+  <div class="bottom-row">
+    <div class="membership-pill">
+      <div class="status-dot"></div>
+      MIEMBRO ACTIVO
     </div>
 
     <div class="crown-wrap" onclick="openFreeFire()" title="Abrir Free Fire">
       <div class="crown-ring"></div>
       <div class="crown-ring-2"></div>
-      <div class="crown-inner">
-        <svg width="22" height="18" viewBox="0 0 22 18" fill="none">
+      <div class="crown-bg">
+        <svg width="18" height="14" viewBox="0 0 22 18" fill="none">
           <path d="M1 17L3 7L7.5 12L11 2L14.5 12L19 7L21 17H1Z"
-            fill="none" stroke="var(--gold)" stroke-width="1.2"
+            fill="none" stroke="#e8820a" stroke-width="1.4"
             stroke-linejoin="round" stroke-linecap="round"/>
-          <circle cx="11" cy="2" r="1" fill="var(--red)"/>
-          <circle cx="1" cy="17" r="0.8" fill="var(--gold)" opacity="0.5"/>
-          <circle cx="21" cy="17" r="0.8" fill="var(--gold)" opacity="0.5"/>
+          <circle cx="11" cy="2" r="1" fill="var(--red2)"/>
+          <circle cx="1"  cy="17" r="0.8" fill="#e8820a" opacity="0.5"/>
+          <circle cx="21" cy="17" r="0.8" fill="#e8820a" opacity="0.5"/>
         </svg>
       </div>
     </div>
 
-    <div class="membership-line">INGRESAR</div>
+    <div class="hud-sys" style="text-align:right;">
+      INGRESAR<br>
+      <span style="color:var(--red);font-size:0.42rem;">FREE FIRE ↗</span>
+    </div>
   </div>
+
+  <!-- HUD BOTTOM -->
+  <div class="hud-bottom">
+    <div class="hud-bottom-txt">SYS/AUTH · VERIFIED</div>
+    <div class="hud-bottom-txt" id="hud-time">--:--:--</div>
+  </div>
+
 </div>
 
 <div class="bottom-pin"></div>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════
-   ONLYRED PERSISTENT STORAGE SYSTEM
-   
-   Strategy: write to ALL available storage layers simultaneously.
-   On read: try each layer in order, take the first valid result,
-   then re-broadcast it to all layers (self-healing).
-   
-   Layers (most to least persistent on iOS):
-   1. IndexedDB         — survives profile reinstall most reliably
-   2. Cache API         — survives profile reinstall (Service Worker cache)
-   3. localStorage      — may be cleared when webclip is deleted
-   4. sessionStorage    — current session only (fallback)
-   
-   The IMEI is used as the canonical device key so even if ALL
-   local storage is wiped, once the user re-registers, the same
-   IMEI will be re-linked and codes already used won't work again
-   (codes are stored per-key in all layers).
-═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════
+   STORAGE KEYS
+═══════════════════════════════════ */
+const KEYS = {
+  registered:  'onlyred_registered',
+  model:       'onlyred_model',
+  ios:         'onlyred_ios',
+  imei:        'onlyred_imei',
+  phone:       'onlyred_phone',
+  regDate:     'onlyred_regdate',
+  expiry:      'onlyred_expiry',
+  usedCodes:   'onlyred_usedcodes',
+  expiryStart: 'onlyred_expirystart'
+};
 
-  const DB_NAME    = 'onlyred_db';
-  const DB_VERSION = 1;
-  const DB_STORE   = 'kv';
-  const CACHE_NAME = 'onlyred_persist_v1';
-  const CACHE_URL  = 'https://onlyred.internal/data'; // virtual URL for Cache API
+const VALID_CODES = [
+  'A7F3K9X2Q4M1','Z8L2C5R9W1H6','P4N7T2B8K6Q3',
+  'X1M9D5A7F2L8','H6Q3Z8R1C4V9','K2W7P5J9N3T4',
+  'R8F1L6X3B2Q7','T5C9H2Z4M8K1','V3N8Q6A1W7P2',
+  'J4B7X2R9L5C8','M9K1T4F8D6Q3','C2P6H9W3Z8N5'
+];
 
-  const VALID_CODES = [
-    'A7F3K9X2Q4M1','Z8L2C5R9W1H6','P4N7T2B8K6Q3',
-    'X1M9D5A7F2L8','H6Q3Z8R1C4V9','K2W7P5J9N3T4',
-    'R8F1L6X3B2Q7','T5C9H2Z4M8K1','V3N8Q6A1W7P2',
-    'J4B7X2R9L5C8','M9K1T4F8D6Q3','C2P6H9W3Z8N5'
-  ];
+/* ── HELPERS ── */
+function ls(key, val) {
+  if (val === undefined) return localStorage.getItem(key);
+  localStorage.setItem(key, val);
+}
+function pad(n) { return String(n).padStart(2,'0'); }
 
-  /* ── IDB helpers ── */
-  let _db = null;
+function showToast(msg, dur=2500) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur);
+}
 
-  function openIDB() {
-    return new Promise((resolve, reject) => {
-      if (_db) return resolve(_db);
-      const req = indexedDB.open(DB_NAME, DB_VERSION);
-      req.onupgradeneeded = e => {
-        e.target.result.createObjectStore(DB_STORE, { keyPath: 'k' });
-      };
-      req.onsuccess = e => { _db = e.target.result; resolve(_db); };
-      req.onerror   = () => reject(req.error);
-    });
-  }
+function formatDate(ts) {
+  const d = new Date(parseInt(ts));
+  return d.toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
 
-  async function idbSet(key, value) {
-    try {
-      const db = await openIDB();
-      return new Promise((resolve, reject) => {
-        const tx = db.transaction(DB_STORE, 'readwrite');
-        tx.objectStore(DB_STORE).put({ k: key, v: value });
-        tx.oncomplete = resolve;
-        tx.onerror    = () => reject(tx.error);
-      });
-    } catch(e) { /* IDB not available */ }
-  }
+/* ── HUD CLOCK ── */
+function tickClock() {
+  const now = new Date();
+  const ts = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+  const el = document.getElementById('hud-time');
+  if (el) el.textContent = ts;
+  const ds = `${pad(now.getDate())}/${pad(now.getMonth()+1)}/${now.getFullYear()}`;
+  const de = document.getElementById('sys-date');
+  if (de) de.textContent = ds;
+  setTimeout(tickClock, 1000);
+}
 
-  async function idbGet(key) {
-    try {
-      const db = await openIDB();
-      return new Promise((resolve, reject) => {
-        const tx  = db.transaction(DB_STORE, 'readonly');
-        const req = tx.objectStore(DB_STORE).get(key);
-        req.onsuccess = () => resolve(req.result ? req.result.v : null);
-        req.onerror   = () => resolve(null);
-      });
-    } catch(e) { return null; }
-  }
+/* ── REGISTRATION ── */
+function submitRegistration() {
+  let valid = true;
+  const model = document.getElementById('inp-model').value.trim();
+  const ios   = document.getElementById('inp-ios').value.trim();
+  const imei  = document.getElementById('inp-imei').value.replace(/\s/g,'');
+  const code  = document.getElementById('inp-code').value.trim();
+  const phone = document.getElementById('inp-phone').value.trim();
 
-  /* ── Cache API helpers ── */
-  async function cacheSet(key, value) {
-    try {
-      const cache = await caches.open(CACHE_NAME);
-      const body  = JSON.stringify({ key, value, ts: Date.now() });
-      await cache.put(
-        CACHE_URL + '/' + encodeURIComponent(key),
-        new Response(body, { headers: { 'Content-Type': 'application/json' } })
-      );
-    } catch(e) { /* Cache API not available */ }
-  }
+  const showErr = (id, show) => {
+    document.getElementById(id).style.display = show ? 'block' : 'none';
+  };
 
-  async function cacheGet(key) {
-    try {
-      const cache = await caches.open(CACHE_NAME);
-      const resp  = await cache.match(CACHE_URL + '/' + encodeURIComponent(key));
-      if (!resp) return null;
-      const data = await resp.json();
-      return data.value;
-    } catch(e) { return null; }
-  }
+  if (!model)   { showErr('err-model', true); valid=false; } else showErr('err-model', false);
+  if (!ios)     { showErr('err-ios',   true); valid=false; } else showErr('err-ios',   false);
+  if (!imei || imei.length<13 || imei.length>17 || !/^\d+$/.test(imei)) {
+    showErr('err-imei', true); valid=false;
+  } else showErr('err-imei', false);
+  if (!code || !phone || phone.length<5) {
+    showErr('err-phone', true); valid=false;
+  } else showErr('err-phone', false);
 
-  /* ── localStorage helpers ── */
-  function lsSet(key, value) {
-    try { localStorage.setItem('onlyred_' + key, value); } catch(e) {}
-  }
-  function lsGet(key) {
-    try { return localStorage.getItem('onlyred_' + key); } catch(e) { return null; }
-  }
+  if (!valid) return;
 
-  /* ── sessionStorage helpers (emergency fallback within session) ── */
-  function ssSet(key, value) {
-    try { sessionStorage.setItem('onlyred_' + key, value); } catch(e) {}
-  }
-  function ssGet(key) {
-    try { return sessionStorage.getItem('onlyred_' + key); } catch(e) { return null; }
-  }
+  const now    = Date.now();
+  const expiry = now + (31*24*60*60*1000);
 
-  /* ══════════════════════════════════════════
-     UNIFIED PERSIST API
-     All reads/writes go through these two functions.
-  ══════════════════════════════════════════ */
-  async function persist(key, value) {
-    // Write to all layers in parallel
-    const strVal = (typeof value === 'string') ? value : JSON.stringify(value);
-    lsSet(key, strVal);
-    ssSet(key, strVal);
-    await Promise.allSettled([
-      idbSet(key, strVal),
-      cacheSet(key, strVal)
-    ]);
-  }
+  ls(KEYS.registered, '1');
+  ls(KEYS.model,      model);
+  ls(KEYS.ios,        ios);
+  ls(KEYS.imei,       imei);
+  ls(KEYS.phone,      code+' '+phone);
+  ls(KEYS.regDate,    now.toString());
+  ls(KEYS.expiry,     expiry.toString());
+  ls(KEYS.usedCodes,  JSON.stringify([]));
 
-  async function recall(key) {
-    // Try layers from most to least persistent
-    let val = await idbGet(key);
-    if (val !== null && val !== undefined) {
-      // Heal other layers while we have it
-      lsSet(key, val);
-      ssSet(key, val);
-      cacheSet(key, val); // async, don't await
-      return val;
+  initMain();
+}
+
+/* ── INIT ── */
+function initMain() {
+  document.getElementById('reg-overlay').style.display  = 'none';
+  document.getElementById('main-stage').style.display   = 'flex';
+  document.getElementById('disp-model').textContent = ls(KEYS.model);
+  document.getElementById('disp-ios').textContent   = ls(KEYS.ios);
+  document.getElementById('disp-imei').textContent  = ls(KEYS.imei);
+  document.getElementById('disp-phone').textContent = ls(KEYS.phone);
+  document.getElementById('disp-date').textContent  = formatDate(ls(KEYS.regDate));
+  startCountdown();
+  tickClock();
+  spawnParticles();
+}
+
+/* ── COUNTDOWN ── */
+function startCountdown() {
+  function tick() {
+    const remaining = parseInt(ls(KEYS.expiry)) - Date.now();
+    if (remaining <= 0) {
+      document.getElementById('cd-days').textContent  = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent  = '00';
+      document.getElementById('cd-secs').textContent  = '00';
+      showExpiryOverlay();
+      return;
     }
-    val = await cacheGet(key);
-    if (val !== null && val !== undefined) {
-      lsSet(key, val);
-      ssSet(key, val);
-      idbSet(key, val); // async, don't await
-      return val;
+    document.getElementById('cd-days').textContent  = pad(Math.floor(remaining/86400000));
+    document.getElementById('cd-hours').textContent = pad(Math.floor((remaining%86400000)/3600000));
+    document.getElementById('cd-mins').textContent  = pad(Math.floor((remaining%3600000)/60000));
+    document.getElementById('cd-secs').textContent  = pad(Math.floor((remaining%60000)/1000));
+    setTimeout(tick, 1000);
+  }
+  tick();
+}
+
+/* ── EXPIRY ── */
+function showExpiryOverlay() {
+  document.getElementById('expiry-overlay').style.display = 'flex';
+  if (!ls(KEYS.expiryStart)) ls(KEYS.expiryStart, Date.now().toString());
+  function tick6h() {
+    const rem = (parseInt(ls(KEYS.expiryStart))+6*3600000) - Date.now();
+    if (rem <= 0) {
+      document.getElementById('timer-6h').textContent = '⛔ BLOQUEADO';
+      document.getElementById('timer-6h').style.color = 'var(--red2)';
+      return;
     }
-    val = lsGet(key);
-    if (val !== null && val !== undefined) {
-      ssSet(key, val);
-      idbSet(key, val);
-      cacheSet(key, val);
-      return val;
-    }
-    val = ssGet(key);
-    if (val !== null && val !== undefined) {
-      lsSet(key, val);
-      idbSet(key, val);
-      cacheSet(key, val);
-      return val;
-    }
-    return null;
+    const h=Math.floor(rem/3600000), m=Math.floor((rem%3600000)/60000), s=Math.floor((rem%60000)/1000);
+    document.getElementById('timer-6h').textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+    setTimeout(tick6h, 1000);
   }
+  tick6h();
+}
 
-  /* ══════════════════════════════════════════
-     DATA BUNDLE
-     All user data is stored as one atomic JSON
-     blob keyed by "reg" — plus individual keys
-     for redundancy. Using a bundle means if even
-     one layer survives with ONE key, we recover all.
-  ══════════════════════════════════════════ */
-  async function saveBundle(data) {
-    const bundle = JSON.stringify(data);
-    // Save as bundle
-    await persist('reg', bundle);
-    // Also save individually for max redundancy
-    await persist('model',       data.model);
-    await persist('ios',         data.ios);
-    await persist('imei',        data.imei);
-    await persist('phone',       data.phone);
-    await persist('regDate',     data.regDate);
-    await persist('expiry',      data.expiry);
-    await persist('usedCodes',   JSON.stringify(data.usedCodes || []));
-    await persist('expiryStart', data.expiryStart || '');
-    await persist('registered',  '1');
+/* ── RENEWAL ── */
+function applyRenewal() {
+  const inp   = document.getElementById('renewal-code-inp').value.trim().toUpperCase();
+  const errEl = document.getElementById('renewal-err');
+  if (!VALID_CODES.includes(inp)) {
+    errEl.textContent   = '// CÓDIGO INVÁLIDO · CONTACTAR @JEXE';
+    errEl.style.display = 'block'; return;
   }
-
-  async function loadBundle() {
-    // Try bundle first
-    const raw = await recall('reg');
-    if (raw) {
-      try {
-        const d = JSON.parse(raw);
-        if (d && d.registered === '1' && d.imei) return d;
-      } catch(e) {}
-    }
-    // Fallback: reconstruct from individual keys
-    const registered = await recall('registered');
-    if (registered !== '1') return null;
-    const imei = await recall('imei');
-    if (!imei) return null;
-    const data = {
-      registered:  '1',
-      model:       await recall('model')       || '',
-      ios:         await recall('ios')         || '',
-      imei:        imei,
-      phone:       await recall('phone')       || '',
-      regDate:     await recall('regDate')     || '',
-      expiry:      await recall('expiry')      || '',
-      usedCodes:   JSON.parse(await recall('usedCodes') || '[]'),
-      expiryStart: await recall('expiryStart') || ''
-    };
-    // Re-save as bundle for future reads
-    await saveBundle(data);
-    return data;
+  const used = JSON.parse(ls(KEYS.usedCodes)||'[]');
+  if (used.includes(inp)) {
+    errEl.textContent   = '// CÓDIGO YA UTILIZADO ANTERIORMENTE';
+    errEl.style.display = 'block'; return;
   }
+  errEl.style.display = 'none';
+  used.push(inp);
+  ls(KEYS.usedCodes, JSON.stringify(used));
+  ls(KEYS.expiry,    (Date.now()+(31*24*60*60*1000)).toString());
+  ls(KEYS.expiryStart, '');
+  document.getElementById('expiry-overlay').style.display = 'none';
+  document.getElementById('renewal-code-inp').value = '';
+  showToast('// MEMBRESÍA RENOVADA · +31 DÍAS');
+  startCountdown();
+}
 
-  /* ══════════════════════════════════════════
-     HELPERS
-  ══════════════════════════════════════════ */
-  function pad(n) { return String(n).padStart(2,'0'); }
+/* ── PRIVACY ── */
+let privacyHidden = false;
+function togglePrivacy() {
+  privacyHidden = !privacyHidden;
+  document.querySelectorAll('.info-val').forEach(v => v.classList.toggle('hidden-val', privacyHidden));
+  document.getElementById('privacy-icon').className = privacyHidden ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+  document.getElementById('privacy-lbl').textContent = privacyHidden ? 'MOSTRAR' : 'OCULTAR';
+}
 
-  function showToast(msg, dur=2500) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), dur);
+/* ── FREE FIRE ── */
+function openFreeFire() {
+  window.location.href = 'freefire://';
+  showToast('// INICIANDO FREE FIRE...');
+}
+
+/* ── PARTICLES ── */
+function spawnParticles() {
+  function spawn() {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random()*100+'vw';
+    p.style.bottom = '0';
+    const dur = 7+Math.random()*10, delay = Math.random()*5;
+    p.style.animationDuration = dur+'s';
+    p.style.animationDelay    = delay+'s';
+    p.style.background = Math.random()>0.5 ? 'var(--red2)' : 'var(--amber2)';
+    p.style.boxShadow  = `0 0 3px ${Math.random()>0.5?'var(--red2)':'var(--amber2)'}`;
+    p.style.opacity = '0';
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),(dur+delay)*1000);
   }
+  setInterval(spawn, 1000);
+  for(let i=0;i<6;i++) setTimeout(spawn,i*250);
+}
 
-  function formatDate(ts) {
-    const d = new Date(parseInt(ts));
-    return d.toLocaleDateString('es-ES', {
-      day:'2-digit', month:'long', year:'numeric',
-      hour:'2-digit', minute:'2-digit'
-    });
-  }
-
-  // In-memory state (loaded from storage on boot)
-  let STATE = null;
-
-  async function updateState(patch) {
-    Object.assign(STATE, patch);
-    await saveBundle(STATE);
-  }
-
-  /* ══════════════════════════════════════════
-     REGISTRATION
-  ══════════════════════════════════════════ */
-  async function submitRegistration() {
-    let valid = true;
-    const model = document.getElementById('inp-model').value.trim();
-    const ios   = document.getElementById('inp-ios').value.trim();
-    const imei  = document.getElementById('inp-imei').value.replace(/\s/g,'');
-    const code  = document.getElementById('inp-code').value.trim();
-    const phone = document.getElementById('inp-phone').value.trim();
-
-    const showErr = (id, show) => {
-      document.getElementById(id).style.display = show ? 'block' : 'none';
-    };
-
-    if (!model)   { showErr('err-model', true); valid=false; } else showErr('err-model', false);
-    if (!ios)     { showErr('err-ios',   true); valid=false; } else showErr('err-ios',   false);
-    if (!imei || imei.length<13 || imei.length>17 || !/^\d+$/.test(imei)) {
-      showErr('err-imei', true); valid=false;
-    } else showErr('err-imei', false);
-    if (!code || !phone || phone.length<5) {
-      showErr('err-phone', true); valid=false;
-    } else showErr('err-phone', false);
-
-    if (!valid) return;
-
-    const now    = Date.now();
-    const expiry = now + (31 * 24 * 60 * 60 * 1000);
-
-    STATE = {
-      registered:  '1',
-      model,
-      ios,
-      imei,
-      phone:       code + ' ' + phone,
-      regDate:     now.toString(),
-      expiry:      expiry.toString(),
-      usedCodes:   [],
-      expiryStart: ''
-    };
-
-    await saveBundle(STATE);
+/* ── BOOT ── */
+(function boot() {
+  if (ls(KEYS.registered) === '1') {
     initMain();
-  }
-
-  /* ══════════════════════════════════════════
-     INIT MAIN VIEW
-  ══════════════════════════════════════════ */
-  function initMain() {
-    document.getElementById('reg-overlay').style.display   = 'none';
-    document.getElementById('main-stage').style.display    = 'flex';
-
-    document.getElementById('disp-model').textContent = STATE.model;
-    document.getElementById('disp-ios').textContent   = STATE.ios;
-    document.getElementById('disp-imei').textContent  = STATE.imei;
-    document.getElementById('disp-phone').textContent = STATE.phone;
-    document.getElementById('disp-date').textContent  = formatDate(STATE.regDate);
-
-    startCountdown();
+  } else {
+    document.getElementById('reg-overlay').style.display = 'flex';
+    document.getElementById('main-stage').style.display  = 'none';
     spawnParticles();
   }
+})();
 
-  /* ══════════════════════════════════════════
-     31-DAY COUNTDOWN
-  ══════════════════════════════════════════ */
-  function startCountdown() {
-    function tick() {
-      const remaining = parseInt(STATE.expiry) - Date.now();
-      if (remaining <= 0) {
-        document.getElementById('cd-days').textContent  = '00';
-        document.getElementById('cd-hours').textContent = '00';
-        document.getElementById('cd-mins').textContent  = '00';
-        document.getElementById('cd-secs').textContent  = '00';
-        showExpiryOverlay();
-        return;
-      }
-      const days  = Math.floor(remaining / 86400000);
-      const hours = Math.floor((remaining % 86400000) / 3600000);
-      const mins  = Math.floor((remaining % 3600000)  / 60000);
-      const secs  = Math.floor((remaining % 60000)    / 1000);
-      document.getElementById('cd-days').textContent  = pad(days);
-      document.getElementById('cd-hours').textContent = pad(hours);
-      document.getElementById('cd-mins').textContent  = pad(mins);
-      document.getElementById('cd-secs').textContent  = pad(secs);
-      setTimeout(tick, 1000);
-    }
-    tick();
-  }
-
-  /* ══════════════════════════════════════════
-     EXPIRY OVERLAY
-  ══════════════════════════════════════════ */
-  async function showExpiryOverlay() {
-    document.getElementById('expiry-overlay').style.display = 'flex';
-    if (!STATE.expiryStart) {
-      await updateState({ expiryStart: Date.now().toString() });
-    }
-    function tick6h() {
-      const rem = (parseInt(STATE.expiryStart) + 6*3600000) - Date.now();
-      if (rem <= 0) {
-        document.getElementById('timer-6h').textContent   = '⛔ BLOQUEADO';
-        document.getElementById('timer-6h').style.color   = 'var(--red)';
-        return;
-      }
-      const h = Math.floor(rem / 3600000);
-      const m = Math.floor((rem % 3600000) / 60000);
-      const s = Math.floor((rem % 60000)   / 1000);
-      document.getElementById('timer-6h').textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
-      setTimeout(tick6h, 1000);
-    }
-    tick6h();
-  }
-
-  /* ══════════════════════════════════════════
-     RENEWAL
-  ══════════════════════════════════════════ */
-  async function applyRenewal() {
-    const inp   = document.getElementById('renewal-code-inp').value.trim().toUpperCase();
-    const errEl = document.getElementById('renewal-err');
-
-    if (!VALID_CODES.includes(inp)) {
-      errEl.textContent    = 'Código inválido. Contacta a @jexe para obtener uno.';
-      errEl.style.display  = 'block';
-      return;
-    }
-
-    const used = STATE.usedCodes || [];
-    if (used.includes(inp)) {
-      errEl.textContent   = 'Este código ya fue utilizado anteriormente.';
-      errEl.style.display = 'block';
-      return;
-    }
-
-    errEl.style.display = 'none';
-
-    const newExpiry = Date.now() + (31 * 24 * 60 * 60 * 1000);
-    await updateState({
-      usedCodes:   [...used, inp],
-      expiry:      newExpiry.toString(),
-      expiryStart: ''
-    });
-
-    document.getElementById('expiry-overlay').style.display = 'none';
-    document.getElementById('renewal-code-inp').value = '';
-    showToast('✓ Membresía renovada por 31 días');
-    startCountdown();
-  }
-
-  /* ══════════════════════════════════════════
-     PRIVACY TOGGLE
-  ══════════════════════════════════════════ */
-  let privacyHidden = false;
-  function togglePrivacy() {
-    privacyHidden = !privacyHidden;
-    document.querySelectorAll('.reg-info-val').forEach(v =>
-      v.classList.toggle('hidden-val', privacyHidden)
-    );
-    document.getElementById('privacy-icon').className =
-      privacyHidden ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
-    document.getElementById('privacy-lbl').textContent =
-      privacyHidden ? 'Mostrar' : 'Ocultar';
-  }
-
-  /* ══════════════════════════════════════════
-     FREE FIRE
-  ══════════════════════════════════════════ */
-  function openFreeFire() {
-    window.location.href = 'freefire://';
-    showToast('Abriendo Free Fire...');
-  }
-
-  /* ══════════════════════════════════════════
-     PARTICLES
-  ══════════════════════════════════════════ */
-  function spawnParticles() {
-    function spawnParticle() {
-      const p = document.createElement('div');
-      p.className = 'particle';
-      p.style.left = Math.random() * 100 + 'vw';
-      p.style.bottom = '0';
-      const dur   = 6 + Math.random() * 10;
-      const delay = Math.random() * 4;
-      p.style.animationDuration = dur + 's';
-      p.style.animationDelay    = delay + 's';
-      p.style.background = Math.random() > 0.5 ? 'var(--red)' : 'var(--gold)';
-      p.style.opacity = '0';
-      document.body.appendChild(p);
-      setTimeout(() => p.remove(), (dur + delay) * 1000);
-    }
-    setInterval(spawnParticle, 1200);
-    for (let i=0; i<5; i++) setTimeout(spawnParticle, i*300);
-  }
-
-  /* ══════════════════════════════════════════
-     BOOT
-  ══════════════════════════════════════════ */
-  (async function boot() {
-    // Show particles while loading
-    spawnParticles();
-
-    STATE = await loadBundle();
-
-    if (!STATE || STATE.registered !== '1') {
-      document.getElementById('reg-overlay').style.display = 'flex';
-      document.getElementById('main-stage').style.display  = 'none';
-    } else {
-      initMain();
-    }
-  })();
-
-  /* Input helpers */
-  document.getElementById('inp-code').addEventListener('input', function() {
-    let v = this.value.replace(/[^\d+]/g,'');
-    if (v && v[0] !== '+') v = '+' + v;
-    this.value = v;
-  });
-
-  document.getElementById('inp-imei').addEventListener('input', function() {
-    this.value = this.value.replace(/\D/g,'');
-  });
-
-  document.getElementById('renewal-code-inp').addEventListener('input', function() {
-    this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
-  });
-
-  document.getElementById('renewal-code-inp').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') applyRenewal();
-  });
+/* Input helpers */
+document.getElementById('inp-code').addEventListener('input', function() {
+  let v = this.value.replace(/[^\d+]/g,'');
+  if (v && v[0]!=='+') v='+'+v;
+  this.value=v;
+});
+document.getElementById('inp-imei').addEventListener('input', function() {
+  this.value=this.value.replace(/\D/g,'');
+});
+document.getElementById('renewal-code-inp').addEventListener('input', function() {
+  this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
+});
+document.getElementById('renewal-code-inp').addEventListener('keydown', function(e) {
+  if(e.key==='Enter') applyRenewal();
+});
 </script>
 </body>
 </html>
